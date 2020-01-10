@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E6054A7E23C73448006F3FE1 /* app.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6054A7D23C73448006F3FE1 /* app.cpp */; };
+		E6054A8123C737F5006F3FE1 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6054A8023C737F5006F3FE1 /* Metal.framework */; };
+		E6054A8523C73848006F3FE1 /* libbgfxRelease.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6054A8223C73848006F3FE1 /* libbgfxRelease.a */; };
+		E6054A8623C73848006F3FE1 /* libbxRelease.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6054A8323C73848006F3FE1 /* libbxRelease.a */; };
+		E6054A8723C73848006F3FE1 /* libbimgRelease.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6054A8423C73848006F3FE1 /* libbimgRelease.a */; };
+		E6054A8923C742A8006F3FE1 /* main.wasm in Resources */ = {isa = PBXBuildFile; fileRef = E6054A8823C742A8006F3FE1 /* main.wasm */; };
+		E6054A8E23C857D5006F3FE1 /* m3_api_bgfx_gen.c in Sources */ = {isa = PBXBuildFile; fileRef = E6054A8D23C857D4006F3FE1 /* m3_api_bgfx_gen.c */; };
+		E6CC489323C88D35002BBDB9 /* m3_api_bgfx.c in Sources */ = {isa = PBXBuildFile; fileRef = E6CC489123C88D35002BBDB9 /* m3_api_bgfx.c */; };
+		E6FC6F6E23C58E42003255FA /* helloworld in Resources */ = {isa = PBXBuildFile; fileRef = E6FC6F6B23C58E41003255FA /* helloworld */; };
 		F4F4C0CD23C48DDA0098C4DA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C0CC23C48DDA0098C4DA /* AppDelegate.m */; };
 		F4F4C0D023C48DDA0098C4DA /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C0CF23C48DDA0098C4DA /* ViewController.mm */; };
 		F4F4C0D323C48DDA0098C4DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4F4C0D123C48DDA0098C4DA /* Main.storyboard */; };
@@ -48,6 +57,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E6054A7C23C73448006F3FE1 /* app.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app.h; sourceTree = "<group>"; };
+		E6054A7D23C73448006F3FE1 /* app.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = app.cpp; sourceTree = "<group>"; };
+		E6054A8023C737F5006F3FE1 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		E6054A8223C73848006F3FE1 /* libbgfxRelease.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbgfxRelease.a; path = "../bgfx/.build/ios-arm64/bin/libbgfxRelease.a"; sourceTree = "<group>"; };
+		E6054A8323C73848006F3FE1 /* libbxRelease.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbxRelease.a; path = "../bgfx/.build/ios-arm64/bin/libbxRelease.a"; sourceTree = "<group>"; };
+		E6054A8423C73848006F3FE1 /* libbimgRelease.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbimgRelease.a; path = "../bgfx/.build/ios-arm64/bin/libbimgRelease.a"; sourceTree = "<group>"; };
+		E6054A8823C742A8006F3FE1 /* main.wasm */ = {isa = PBXFileReference; lastKnownFileType = file; name = main.wasm; path = ../../bgfxwasm/main.wasm; sourceTree = "<group>"; };
+		E6054A8D23C857D4006F3FE1 /* m3_api_bgfx_gen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_api_bgfx_gen.c; path = source/m3_api_bgfx_gen.c; sourceTree = SOURCE_ROOT; };
+		E6CC489123C88D35002BBDB9 /* m3_api_bgfx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_api_bgfx.c; path = source/m3_api_bgfx.c; sourceTree = SOURCE_ROOT; };
+		E6CC489223C88D35002BBDB9 /* m3_api_bgfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_api_bgfx.h; path = source/m3_api_bgfx.h; sourceTree = SOURCE_ROOT; };
+		E6FC6F6B23C58E41003255FA /* helloworld */ = {isa = PBXFileReference; lastKnownFileType = file; path = helloworld; sourceTree = "<group>"; };
 		F4F4C0C823C48DDA0098C4DA /* wams3test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wams3test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F4C0CB23C48DDA0098C4DA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F4F4C0CC23C48DDA0098C4DA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -104,6 +124,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6054A8523C73848006F3FE1 /* libbgfxRelease.a in Frameworks */,
+				E6054A8623C73848006F3FE1 /* libbxRelease.a in Frameworks */,
+				E6054A8723C73848006F3FE1 /* libbimgRelease.a in Frameworks */,
+				E6054A8123C737F5006F3FE1 /* Metal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,14 +148,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E6054A7F23C737F5006F3FE1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E6054A8223C73848006F3FE1 /* libbgfxRelease.a */,
+				E6054A8423C73848006F3FE1 /* libbimgRelease.a */,
+				E6054A8323C73848006F3FE1 /* libbxRelease.a */,
+				E6054A8023C737F5006F3FE1 /* Metal.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E6FC6F6A23C58E41003255FA /* wasm3_tiny_data */ = {
+			isa = PBXGroup;
+			children = (
+				E6054A8823C742A8006F3FE1 /* main.wasm */,
+				E6FC6F6B23C58E41003255FA /* helloworld */,
+			);
+			path = wasm3_tiny_data;
+			sourceTree = "<group>";
+		};
 		F4F4C0BF23C48DDA0098C4DA = {
 			isa = PBXGroup;
 			children = (
+				E6FC6F6A23C58E41003255FA /* wasm3_tiny_data */,
 				F4F4C0FF23C490260098C4DA /* wasm3 */,
 				F4F4C0CA23C48DDA0098C4DA /* wams3test */,
 				F4F4C0E323C48DDB0098C4DA /* wams3testTests */,
 				F4F4C0EE23C48DDB0098C4DA /* wams3testUITests */,
 				F4F4C0C923C48DDA0098C4DA /* Products */,
+				E6054A7F23C737F5006F3FE1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,6 +194,8 @@
 		F4F4C0CA23C48DDA0098C4DA /* wams3test */ = {
 			isa = PBXGroup;
 			children = (
+				E6054A7C23C73448006F3FE1 /* app.h */,
+				E6054A7D23C73448006F3FE1 /* app.cpp */,
 				F4F4C0CB23C48DDA0098C4DA /* AppDelegate.h */,
 				F4F4C0CC23C48DDA0098C4DA /* AppDelegate.m */,
 				F4F4C0CE23C48DDA0098C4DA /* ViewController.h */,
@@ -182,6 +230,8 @@
 		F4F4C0FF23C490260098C4DA /* wasm3 */ = {
 			isa = PBXGroup;
 			children = (
+				E6CC489123C88D35002BBDB9 /* m3_api_bgfx.c */,
+				E6CC489223C88D35002BBDB9 /* m3_api_bgfx.h */,
 				F4F4C12C23C490550098C4DA /* extra */,
 				F4F4C10423C490430098C4DA /* m3_api_defs.h */,
 				F4F4C10923C490430098C4DA /* m3_api_libc.c */,
@@ -212,6 +262,7 @@
 				F4F4C10123C490430098C4DA /* m3_optimize.c */,
 				F4F4C11123C490430098C4DA /* m3_parse.c */,
 				F4F4C11B23C490440098C4DA /* m3.h */,
+				E6054A8D23C857D4006F3FE1 /* m3_api_bgfx_gen.c */,
 			);
 			path = wasm3;
 			sourceTree = "<group>";
@@ -330,8 +381,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6054A8923C742A8006F3FE1 /* main.wasm in Resources */,
 				F4F4C0D823C48DDB0098C4DA /* LaunchScreen.storyboard in Resources */,
 				F4F4C0D523C48DDB0098C4DA /* Assets.xcassets in Resources */,
+				E6FC6F6E23C58E42003255FA /* helloworld in Resources */,
 				F4F4C0D323C48DDA0098C4DA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,6 +412,7 @@
 			files = (
 				F4F4C12323C490440098C4DA /* m3_api_libc.c in Sources */,
 				F4F4C12723C490440098C4DA /* m3_info.c in Sources */,
+				E6054A8E23C857D5006F3FE1 /* m3_api_bgfx_gen.c in Sources */,
 				F4F4C12523C490440098C4DA /* m3_env.c in Sources */,
 				F4F4C12223C490440098C4DA /* m3_emit.c in Sources */,
 				F4F4C12B23C490440098C4DA /* m3_code.c in Sources */,
@@ -367,9 +421,11 @@
 				F4F4C0D023C48DDA0098C4DA /* ViewController.mm in Sources */,
 				F4F4C11E23C490440098C4DA /* m3_compile.c in Sources */,
 				F4F4C12823C490440098C4DA /* m3_core.c in Sources */,
+				E6054A7E23C73448006F3FE1 /* app.cpp in Sources */,
 				F4F4C12923C490440098C4DA /* m3_parse.c in Sources */,
 				F4F4C0DB23C48DDB0098C4DA /* main.m in Sources */,
 				F4F4C11F23C490440098C4DA /* m3_optimize.c in Sources */,
+				E6CC489323C88D35002BBDB9 /* m3_api_bgfx.c in Sources */,
 				F4F4C12623C490440098C4DA /* m3_module.c in Sources */,
 				F4F4C12023C490440098C4DA /* m3_bind.c in Sources */,
 				F4F4C0CD23C48DDA0098C4DA /* AppDelegate.m in Sources */,
@@ -478,7 +534,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../bgfx/include,
+					../bx/include,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LIBRARY_SEARCH_PATHS = "../bgfx/.build/ios-arm64/bin";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -531,7 +592,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../bgfx/include,
+					../bx/include,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LIBRARY_SEARCH_PATHS = "../bgfx/.build/ios-arm64/bin";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -544,16 +610,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z6SFPV59E3;
+				DEVELOPMENT_TEAM = MV38XSKV68;
 				GCC_INPUT_FILETYPE = automatic;
-				HEADER_SEARCH_PATHS = source;
+				HEADER_SEARCH_PATHS = (
+					../bx/include,
+					../bgfx/include,
+					source,
+				);
 				INFOPLIST_FILE = wams3test/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				OTHER_CFLAGS = "-Dd_m3HasWASI";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zorro.testunity.wams3test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zorro.testunity.wams3test11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -564,16 +634,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z6SFPV59E3;
+				DEVELOPMENT_TEAM = MV38XSKV68;
 				GCC_INPUT_FILETYPE = automatic;
-				HEADER_SEARCH_PATHS = source;
+				HEADER_SEARCH_PATHS = (
+					../bx/include,
+					../bgfx/include,
+					source,
+				);
 				INFOPLIST_FILE = wams3test/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				OTHER_CFLAGS = "-Dd_m3HasWASI";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zorro.testunity.wams3test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zorro.testunity.wams3test11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
