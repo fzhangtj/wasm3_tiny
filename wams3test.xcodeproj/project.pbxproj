@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E6054A7E23C73448006F3FE1 /* app.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6054A7D23C73448006F3FE1 /* app.cpp */; };
 		E6054A8123C737F5006F3FE1 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6054A8023C737F5006F3FE1 /* Metal.framework */; };
 		E6054A8523C73848006F3FE1 /* libbgfxRelease.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6054A8223C73848006F3FE1 /* libbgfxRelease.a */; };
 		E6054A8623C73848006F3FE1 /* libbxRelease.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6054A8323C73848006F3FE1 /* libbxRelease.a */; };
@@ -57,8 +56,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E6054A7C23C73448006F3FE1 /* app.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app.h; sourceTree = "<group>"; };
-		E6054A7D23C73448006F3FE1 /* app.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = app.cpp; sourceTree = "<group>"; };
 		E6054A8023C737F5006F3FE1 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		E6054A8223C73848006F3FE1 /* libbgfxRelease.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbgfxRelease.a; path = "../bgfx/.build/ios-arm64/bin/libbgfxRelease.a"; sourceTree = "<group>"; };
 		E6054A8323C73848006F3FE1 /* libbxRelease.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbxRelease.a; path = "../bgfx/.build/ios-arm64/bin/libbxRelease.a"; sourceTree = "<group>"; };
@@ -194,8 +191,6 @@
 		F4F4C0CA23C48DDA0098C4DA /* wams3test */ = {
 			isa = PBXGroup;
 			children = (
-				E6054A7C23C73448006F3FE1 /* app.h */,
-				E6054A7D23C73448006F3FE1 /* app.cpp */,
 				F4F4C0CB23C48DDA0098C4DA /* AppDelegate.h */,
 				F4F4C0CC23C48DDA0098C4DA /* AppDelegate.m */,
 				F4F4C0CE23C48DDA0098C4DA /* ViewController.h */,
@@ -421,7 +416,6 @@
 				F4F4C0D023C48DDA0098C4DA /* ViewController.mm in Sources */,
 				F4F4C11E23C490440098C4DA /* m3_compile.c in Sources */,
 				F4F4C12823C490440098C4DA /* m3_core.c in Sources */,
-				E6054A7E23C73448006F3FE1 /* app.cpp in Sources */,
 				F4F4C12923C490440098C4DA /* m3_parse.c in Sources */,
 				F4F4C0DB23C48DDB0098C4DA /* main.m in Sources */,
 				F4F4C11F23C490440098C4DA /* m3_optimize.c in Sources */,
