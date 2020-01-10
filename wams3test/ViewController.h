@@ -13,3 +13,8 @@
 
 @end
 
+@interface View : UIView
+{
+    CADisplayLink* m_displayLink;
+}
+@end
