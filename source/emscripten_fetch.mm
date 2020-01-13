@@ -18,6 +18,17 @@ m3ApiRawFunction(_emscripten_fetch_free)
     return result;
 }
 
+static void runOnMainThread(void (^block)(void))
+{
+    if (!block) return;
+
+    if ( [[NSThread currentThread] isMainThread] ) {
+        block();
+    } else {
+        dispatch_async(dispatch_get_main_queue(), block);
+    }
+}
+
 m3ApiRawFunction(emscripten_start_fetch)
 {
     M3Result result = m3Err_none;
@@ -68,7 +79,7 @@ _       (m3_FindIndirectFunction(&onsuccessFunc, module, onsuccess))
 _       (m3_FindFunction(&mallocFunc, runtime, "malloc"))
     }
     
-    completionHandler = ^(NSData *receivedData, NSURLResponse *response, NSError *error) {
+    completionHandler = ^(NSData *receivedData, NSURLResponse *response, NSError *error) {runOnMainThread(^{
         M3Result result = m3Err_none;
         
         if (error) {
@@ -116,7 +127,7 @@ _               (m3_CallDirect(onerrorFunc, args, NULL))
         if (result) {
             fprintf(stderr, "error in dataTask completionHandler: %s.", result);
         }
-    };
+    });};
     
     task = [[NSURLSession sharedSession]
             dataTaskWithRequest:request completionHandler:completionHandler];
