@@ -166,6 +166,37 @@ m3ApiRawFunction(js_html_setCanvasSize)
     m3ApiReturn(1)
 }
 
+m3ApiRawFunction(js_inputInit)
+{
+    m3ApiReturnType (i32)
+    m3ApiReturn(1)
+}
+
+m3ApiRawFunction(js_inputResetStreams)
+{
+    return m3Err_none;
+}
+
+m3ApiRawFunction(js_inputSetMouseMode)
+{
+    m3ApiGetArg  (i32,    arg1)
+    return m3Err_none;
+}
+
+m3ApiRawFunction(js_inputGetKeyStream)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArg  (i32,    arg1)
+    m3ApiGetArg  (i32,    arg2)
+    m3ApiReturn(0)
+}
+
+m3ApiRawFunction(js_inputGetCanvasLost)
+{
+    m3ApiReturnType (i32)
+    m3ApiReturn(0)
+}
+
 M3Result    m3_LinkENV     (IM3Module module)
 {
     M3Result result = m3Err_none;
@@ -201,6 +232,15 @@ _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_getCa
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_getFrameSize",                          "v(ii)", &js_html_getScreenSize)));
 
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_setCanvasSize",                         "i(iii)", &js_html_setCanvasSize)));
+
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputInit",                         "i()", &js_inputInit)));
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputResetStreams",                 "v()", &js_inputResetStreams)));
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputSetMouseMode",                 "v(i)", &js_inputSetMouseMode)));
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetKeyStream",                 "i(ii)", &js_inputGetKeyStream)));
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetMouseStream",               "i(ii)", &js_inputGetKeyStream)));
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetTouchStream",               "i(ii)", &js_inputGetKeyStream)));
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetCanvasLost",                "i()", &js_inputGetCanvasLost)));
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetFocusLost",                 "i()", &js_inputGetCanvasLost)));
 
 _catch:
     return result;
