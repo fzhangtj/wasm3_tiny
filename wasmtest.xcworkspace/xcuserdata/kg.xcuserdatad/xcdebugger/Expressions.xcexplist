@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "::-[View start]():ViewController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "op_Entry:m3_exec.c">
+      </ContextState>
+      <ContextState
+         contextName = "Compile_Function:m3_compile.c">
+      </ContextState>
+      <ContextState
+         contextName = "::emscripten_start_fetch(IM3Runtime, uint64_t *, void *):emscripten_fetch.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "runtime">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "op_CallIndirect:m3_exec.c">
+      </ContextState>
+      <ContextState
+         contextName = "::repl_load(IM3Runtime, const char *, void *):ViewController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "op_Compile:m3_exec.c">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

@@ -52,7 +52,7 @@ m3ApiRawFunction(env_clock)
 
 m3ApiRawFunction(js_html_initImageLoading)
 {
-    m3ApiTrap(m3Err_none);
+    return m3Err_none;
 }
 
 m3ApiRawFunction(__syscall4)
@@ -139,6 +139,23 @@ m3ApiRawFunction(emscripten_is_main_browser_thread)
 }
 
 
+m3ApiRawFunction(js_html_init)
+{
+    return m3Err_none;
+}
+
+m3ApiRawFunction(js_html_getScreenSize)
+{
+    m3ApiGetArgMem  (u32*,    wPtr)
+    m3ApiGetArgMem  (u32*,    hPtr)
+    
+    *wPtr = 375;
+    *hPtr = 667;
+    
+    return m3Err_none;
+}
+
+
 M3Result    m3_LinkENV     (IM3Module module)
 {
     M3Result result = m3Err_none;
@@ -162,6 +179,10 @@ _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "emscripten_is
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "emscripten_start_fetch",                        "v(i)",  &emscripten_start_fetch)));
 
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "_emscripten_fetch_free",                        "v(i)",  &_emscripten_fetch_free)));
+
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_init",                                  "v()",   &js_html_init)));
+
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_getScreenSize",                         "v(ii)", &js_html_getScreenSize)));
 
 _catch:
     return result;

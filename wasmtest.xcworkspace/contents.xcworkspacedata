@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../wasm3/buildxcode/wasm3.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "container:wams3test.xcodeproj">
+   </FileRef>
+</Workspace>
