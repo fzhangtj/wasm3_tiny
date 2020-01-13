@@ -156,6 +156,16 @@ m3ApiRawFunction(js_html_getScreenSize)
 }
 
 
+m3ApiRawFunction(js_html_setCanvasSize)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArg  (i32,    weight)
+    m3ApiGetArg  (i32,    height)
+    m3ApiGetArg  (i32,    webgl)
+
+    m3ApiReturn(1)
+}
+
 M3Result    m3_LinkENV     (IM3Module module)
 {
     M3Result result = m3Err_none;
@@ -164,6 +174,8 @@ M3Result    m3_LinkENV     (IM3Module module)
 
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "emscripten_get_now",                            "F()",   &emscripten_get_now)));
   
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "emscripten_performance_now",                    "F()",   &emscripten_get_now)));
+
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "clock",                                         "i()",   &env_clock)));
 
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_initImageLoading",                      "v()",   &js_html_initImageLoading)));
@@ -183,6 +195,12 @@ _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "_emscripten_f
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_init",                                  "v()",   &js_html_init)));
 
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_getScreenSize",                         "v(ii)", &js_html_getScreenSize)));
+
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_getCanvasSize",                         "v(ii)", &js_html_getScreenSize)));
+
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_getFrameSize",                          "v(ii)", &js_html_getScreenSize)));
+
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_setCanvasSize",                         "i(iii)", &js_html_setCanvasSize)));
 
 _catch:
     return result;
