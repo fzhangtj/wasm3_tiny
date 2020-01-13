@@ -24,6 +24,31 @@ extern "C" {
 #include <string.h>
 #define FATAL(msg, ...) { printf("Error: [Fatal] " msg "\n", ##__VA_ARGS__); }
 
+typedef struct bgfx_memory_s_wasm
+{
+    u32             data;               /** Pointer to data.                         */
+    uint32_t        size;               /** Data size.                               */
+} bgfx_memory_s_wasm;
+
+u32 bgfxmemory_t_to_wasm(bgfx_memory_t *mem_block, u8* _mem) {
+    u32 ptr = (u8 *)mem_block - _mem;
+    bgfx_memory_s_wasm *mem_block_wasm = (bgfx_memory_s_wasm *)mem_block;
+    
+    mem_block_wasm->data = (u8*) mem_block->data - _mem;
+    mem_block_wasm->size = mem_block->size;
+    
+    return ptr;
+}
+
+bgfx_memory_t* bgfxmemory_t_from_wasm(u32 ptr, u8* _mem) {
+    bgfx_memory_s_wasm *mem_block_wasm = (bgfx_memory_s_wasm *)(ptr + _mem);
+    bgfx_memory_t *mem_block = (bgfx_memory_t *)(ptr + _mem);
+    
+    mem_block->size = mem_block_wasm->size;
+    mem_block->data = (uint8_t *) (mem_block_wasm->data + _mem);
+    return mem_block;
+}
+
 
 static IM3Function mallocFunc;
 
