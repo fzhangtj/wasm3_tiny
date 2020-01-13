@@ -7,64 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CADEE5F823C96E96004663B9 /* libwasm3lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CADEE5F723C96E96004663B9 /* libwasm3lib.a */; };
+		CADEE60D23C97F13004663B9 /* m3_api_env.c in Sources */ = {isa = PBXBuildFile; fileRef = CADEE60C23C97F13004663B9 /* m3_api_env.c */; };
+		CADEE61023CC0EDC004663B9 /* emscripten_fetch.mm in Sources */ = {isa = PBXBuildFile; fileRef = CADEE60F23CC0EDC004663B9 /* emscripten_fetch.mm */; };
 		E6054A8123C737F5006F3FE1 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6054A8023C737F5006F3FE1 /* Metal.framework */; };
 		E6054A8523C73848006F3FE1 /* libbgfxRelease.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6054A8223C73848006F3FE1 /* libbgfxRelease.a */; };
 		E6054A8623C73848006F3FE1 /* libbxRelease.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6054A8323C73848006F3FE1 /* libbxRelease.a */; };
 		E6054A8723C73848006F3FE1 /* libbimgRelease.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6054A8423C73848006F3FE1 /* libbimgRelease.a */; };
-		E6054A8923C742A8006F3FE1 /* main.wasm in Resources */ = {isa = PBXBuildFile; fileRef = E6054A8823C742A8006F3FE1 /* main.wasm */; };
 		E6054A8E23C857D5006F3FE1 /* m3_api_bgfx_gen.c in Sources */ = {isa = PBXBuildFile; fileRef = E6054A8D23C857D4006F3FE1 /* m3_api_bgfx_gen.c */; };
 		E6CC489323C88D35002BBDB9 /* m3_api_bgfx.c in Sources */ = {isa = PBXBuildFile; fileRef = E6CC489123C88D35002BBDB9 /* m3_api_bgfx.c */; };
-		E6FC6F6E23C58E42003255FA /* helloworld in Resources */ = {isa = PBXBuildFile; fileRef = E6FC6F6B23C58E41003255FA /* helloworld */; };
 		F4F4C0CD23C48DDA0098C4DA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C0CC23C48DDA0098C4DA /* AppDelegate.m */; };
 		F4F4C0D023C48DDA0098C4DA /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C0CF23C48DDA0098C4DA /* ViewController.mm */; };
 		F4F4C0D323C48DDA0098C4DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4F4C0D123C48DDA0098C4DA /* Main.storyboard */; };
 		F4F4C0D523C48DDB0098C4DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4F4C0D423C48DDB0098C4DA /* Assets.xcassets */; };
 		F4F4C0D823C48DDB0098C4DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4F4C0D623C48DDB0098C4DA /* LaunchScreen.storyboard */; };
 		F4F4C0DB23C48DDB0098C4DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C0DA23C48DDB0098C4DA /* main.m */; };
-		F4F4C0E523C48DDB0098C4DA /* wams3testTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C0E423C48DDB0098C4DA /* wams3testTests.m */; };
-		F4F4C0F023C48DDB0098C4DA /* wams3testUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C0EF23C48DDB0098C4DA /* wams3testUITests.m */; };
-		F4F4C11E23C490440098C4DA /* m3_compile.c in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C10023C490430098C4DA /* m3_compile.c */; };
-		F4F4C11F23C490440098C4DA /* m3_optimize.c in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C10123C490430098C4DA /* m3_optimize.c */; };
-		F4F4C12023C490440098C4DA /* m3_bind.c in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C10323C490430098C4DA /* m3_bind.c */; };
-		F4F4C12123C490440098C4DA /* m3_exec.c in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C10723C490430098C4DA /* m3_exec.c */; };
-		F4F4C12223C490440098C4DA /* m3_emit.c in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C10823C490430098C4DA /* m3_emit.c */; };
-		F4F4C12323C490440098C4DA /* m3_api_libc.c in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C10923C490430098C4DA /* m3_api_libc.c */; };
-		F4F4C12423C490440098C4DA /* m3_api_wasi.c in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C10B23C490430098C4DA /* m3_api_wasi.c */; };
-		F4F4C12523C490440098C4DA /* m3_env.c in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C10D23C490430098C4DA /* m3_env.c */; };
-		F4F4C12623C490440098C4DA /* m3_module.c in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C10E23C490430098C4DA /* m3_module.c */; };
-		F4F4C12723C490440098C4DA /* m3_info.c in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C10F23C490430098C4DA /* m3_info.c */; };
-		F4F4C12823C490440098C4DA /* m3_core.c in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C11023C490430098C4DA /* m3_core.c */; };
-		F4F4C12923C490440098C4DA /* m3_parse.c in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C11123C490430098C4DA /* m3_parse.c */; };
-		F4F4C12B23C490440098C4DA /* m3_code.c in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C11923C490440098C4DA /* m3_code.c */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		F4F4C0E123C48DDB0098C4DA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F4F4C0C023C48DDA0098C4DA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F4F4C0C723C48DDA0098C4DA;
-			remoteInfo = wams3test;
-		};
-		F4F4C0EC23C48DDB0098C4DA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F4F4C0C023C48DDA0098C4DA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F4F4C0C723C48DDA0098C4DA;
-			remoteInfo = wams3test;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		CADEE5F723C96E96004663B9 /* libwasm3lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwasm3lib.a; path = "../wasm3/build/Debug-iphoneos/libwasm3lib.a"; sourceTree = "<group>"; };
+		CADEE60B23C97F13004663B9 /* m3_api_env.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = m3_api_env.h; path = source/m3_api_env.h; sourceTree = SOURCE_ROOT; };
+		CADEE60C23C97F13004663B9 /* m3_api_env.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = m3_api_env.c; path = source/m3_api_env.c; sourceTree = SOURCE_ROOT; };
+		CADEE60E23CC0EDC004663B9 /* emscripten_fetch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = emscripten_fetch.h; path = source/emscripten_fetch.h; sourceTree = SOURCE_ROOT; };
+		CADEE60F23CC0EDC004663B9 /* emscripten_fetch.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = emscripten_fetch.mm; path = source/emscripten_fetch.mm; sourceTree = SOURCE_ROOT; };
 		E6054A8023C737F5006F3FE1 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		E6054A8223C73848006F3FE1 /* libbgfxRelease.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbgfxRelease.a; path = "../bgfx/.build/ios-arm64/bin/libbgfxRelease.a"; sourceTree = "<group>"; };
 		E6054A8323C73848006F3FE1 /* libbxRelease.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbxRelease.a; path = "../bgfx/.build/ios-arm64/bin/libbxRelease.a"; sourceTree = "<group>"; };
 		E6054A8423C73848006F3FE1 /* libbimgRelease.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbimgRelease.a; path = "../bgfx/.build/ios-arm64/bin/libbimgRelease.a"; sourceTree = "<group>"; };
-		E6054A8823C742A8006F3FE1 /* main.wasm */ = {isa = PBXFileReference; lastKnownFileType = file; name = main.wasm; path = ../../bgfxwasm/main.wasm; sourceTree = "<group>"; };
 		E6054A8D23C857D4006F3FE1 /* m3_api_bgfx_gen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_api_bgfx_gen.c; path = source/m3_api_bgfx_gen.c; sourceTree = SOURCE_ROOT; };
 		E6CC489123C88D35002BBDB9 /* m3_api_bgfx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_api_bgfx.c; path = source/m3_api_bgfx.c; sourceTree = SOURCE_ROOT; };
 		E6CC489223C88D35002BBDB9 /* m3_api_bgfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_api_bgfx.h; path = source/m3_api_bgfx.h; sourceTree = SOURCE_ROOT; };
-		E6FC6F6B23C58E41003255FA /* helloworld */ = {isa = PBXFileReference; lastKnownFileType = file; path = helloworld; sourceTree = "<group>"; };
 		F4F4C0C823C48DDA0098C4DA /* wams3test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wams3test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F4C0CB23C48DDA0098C4DA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F4F4C0CC23C48DDA0098C4DA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -75,45 +47,10 @@
 		F4F4C0D723C48DDB0098C4DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4F4C0D923C48DDB0098C4DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4F4C0DA23C48DDB0098C4DA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F4F4C0E023C48DDB0098C4DA /* wams3testTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wams3testTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F4C0E423C48DDB0098C4DA /* wams3testTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wams3testTests.m; sourceTree = "<group>"; };
 		F4F4C0E623C48DDB0098C4DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F4F4C0EB23C48DDB0098C4DA /* wams3testUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wams3testUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F4C0EF23C48DDB0098C4DA /* wams3testUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wams3testUITests.m; sourceTree = "<group>"; };
 		F4F4C0F123C48DDB0098C4DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F4F4C10023C490430098C4DA /* m3_compile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_compile.c; path = source/m3_compile.c; sourceTree = SOURCE_ROOT; };
-		F4F4C10123C490430098C4DA /* m3_optimize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_optimize.c; path = source/m3_optimize.c; sourceTree = SOURCE_ROOT; };
-		F4F4C10223C490430098C4DA /* m3_math_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_math_utils.h; path = source/m3_math_utils.h; sourceTree = SOURCE_ROOT; };
-		F4F4C10323C490430098C4DA /* m3_bind.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_bind.c; path = source/m3_bind.c; sourceTree = SOURCE_ROOT; };
-		F4F4C10423C490430098C4DA /* m3_api_defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_api_defs.h; path = source/m3_api_defs.h; sourceTree = SOURCE_ROOT; };
-		F4F4C10523C490430098C4DA /* m3_code.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_code.h; path = source/m3_code.h; sourceTree = SOURCE_ROOT; };
-		F4F4C10623C490430098C4DA /* m3_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_info.h; path = source/m3_info.h; sourceTree = SOURCE_ROOT; };
-		F4F4C10723C490430098C4DA /* m3_exec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_exec.c; path = source/m3_exec.c; sourceTree = SOURCE_ROOT; };
-		F4F4C10823C490430098C4DA /* m3_emit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_emit.c; path = source/m3_emit.c; sourceTree = SOURCE_ROOT; };
-		F4F4C10923C490430098C4DA /* m3_api_libc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_api_libc.c; path = source/m3_api_libc.c; sourceTree = SOURCE_ROOT; };
-		F4F4C10A23C490430098C4DA /* m3_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_core.h; path = source/m3_core.h; sourceTree = SOURCE_ROOT; };
-		F4F4C10B23C490430098C4DA /* m3_api_wasi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_api_wasi.c; path = source/m3_api_wasi.c; sourceTree = SOURCE_ROOT; };
-		F4F4C10C23C490430098C4DA /* m3_emit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_emit.h; path = source/m3_emit.h; sourceTree = SOURCE_ROOT; };
-		F4F4C10D23C490430098C4DA /* m3_env.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_env.c; path = source/m3_env.c; sourceTree = SOURCE_ROOT; };
-		F4F4C10E23C490430098C4DA /* m3_module.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_module.c; path = source/m3_module.c; sourceTree = SOURCE_ROOT; };
-		F4F4C10F23C490430098C4DA /* m3_info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_info.c; path = source/m3_info.c; sourceTree = SOURCE_ROOT; };
-		F4F4C11023C490430098C4DA /* m3_core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_core.c; path = source/m3_core.c; sourceTree = SOURCE_ROOT; };
-		F4F4C11123C490430098C4DA /* m3_parse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_parse.c; path = source/m3_parse.c; sourceTree = SOURCE_ROOT; };
-		F4F4C11323C490430098C4DA /* m3_compile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_compile.h; path = source/m3_compile.h; sourceTree = SOURCE_ROOT; };
-		F4F4C11423C490430098C4DA /* m3_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_config.h; path = source/m3_config.h; sourceTree = SOURCE_ROOT; };
-		F4F4C11523C490430098C4DA /* m3_env.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_env.h; path = source/m3_env.h; sourceTree = SOURCE_ROOT; };
-		F4F4C11623C490440098C4DA /* m3_api_wasi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_api_wasi.h; path = source/m3_api_wasi.h; sourceTree = SOURCE_ROOT; };
-		F4F4C11723C490440098C4DA /* m3_exec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_exec.h; path = source/m3_exec.h; sourceTree = SOURCE_ROOT; };
-		F4F4C11823C490440098C4DA /* m3_config_platforms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_config_platforms.h; path = source/m3_config_platforms.h; sourceTree = SOURCE_ROOT; };
-		F4F4C11923C490440098C4DA /* m3_code.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_code.c; path = source/m3_code.c; sourceTree = SOURCE_ROOT; };
-		F4F4C11A23C490440098C4DA /* m3_exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_exception.h; path = source/m3_exception.h; sourceTree = SOURCE_ROOT; };
-		F4F4C11B23C490440098C4DA /* m3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3.h; path = source/m3.h; sourceTree = SOURCE_ROOT; };
-		F4F4C11C23C490440098C4DA /* m3_api_libc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_api_libc.h; path = source/m3_api_libc.h; sourceTree = SOURCE_ROOT; };
-		F4F4C11D23C490440098C4DA /* m3_exec_defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_exec_defs.h; path = source/m3_exec_defs.h; sourceTree = SOURCE_ROOT; };
-		F4F4C12D23C490670098C4DA /* wasi_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wasi_core.h; path = source/extra/wasi_core.h; sourceTree = SOURCE_ROOT; };
-		F4F4C12E23C490670098C4DA /* fib64.wasm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fib64.wasm.h; path = source/extra/fib64.wasm.h; sourceTree = SOURCE_ROOT; };
-		F4F4C12F23C490670098C4DA /* fib32_tail.wasm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fib32_tail.wasm.h; path = source/extra/fib32_tail.wasm.h; sourceTree = SOURCE_ROOT; };
-		F4F4C13023C490670098C4DA /* fib32.wasm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fib32.wasm.h; path = source/extra/fib32.wasm.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,24 +58,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CADEE5F823C96E96004663B9 /* libwasm3lib.a in Frameworks */,
 				E6054A8523C73848006F3FE1 /* libbgfxRelease.a in Frameworks */,
 				E6054A8623C73848006F3FE1 /* libbxRelease.a in Frameworks */,
 				E6054A8723C73848006F3FE1 /* libbimgRelease.a in Frameworks */,
 				E6054A8123C737F5006F3FE1 /* Metal.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F4F4C0DD23C48DDB0098C4DA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F4F4C0E823C48DDB0098C4DA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +72,7 @@
 		E6054A7F23C737F5006F3FE1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CADEE5F723C96E96004663B9 /* libwasm3lib.a */,
 				E6054A8223C73848006F3FE1 /* libbgfxRelease.a */,
 				E6054A8423C73848006F3FE1 /* libbimgRelease.a */,
 				E6054A8323C73848006F3FE1 /* libbxRelease.a */,
@@ -156,19 +81,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E6FC6F6A23C58E41003255FA /* wasm3_tiny_data */ = {
+		E6FC6F6A23C58E41003255FA /* data */ = {
 			isa = PBXGroup;
 			children = (
-				E6054A8823C742A8006F3FE1 /* main.wasm */,
-				E6FC6F6B23C58E41003255FA /* helloworld */,
 			);
-			path = wasm3_tiny_data;
+			path = data;
 			sourceTree = "<group>";
 		};
 		F4F4C0BF23C48DDA0098C4DA = {
 			isa = PBXGroup;
 			children = (
-				E6FC6F6A23C58E41003255FA /* wasm3_tiny_data */,
+				E6FC6F6A23C58E41003255FA /* data */,
 				F4F4C0FF23C490260098C4DA /* wasm3 */,
 				F4F4C0CA23C48DDA0098C4DA /* wams3test */,
 				F4F4C0E323C48DDB0098C4DA /* wams3testTests */,
@@ -182,8 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				F4F4C0C823C48DDA0098C4DA /* wams3test.app */,
-				F4F4C0E023C48DDB0098C4DA /* wams3testTests.xctest */,
-				F4F4C0EB23C48DDB0098C4DA /* wams3testUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,50 +148,13 @@
 			children = (
 				E6CC489123C88D35002BBDB9 /* m3_api_bgfx.c */,
 				E6CC489223C88D35002BBDB9 /* m3_api_bgfx.h */,
-				F4F4C12C23C490550098C4DA /* extra */,
-				F4F4C10423C490430098C4DA /* m3_api_defs.h */,
-				F4F4C10923C490430098C4DA /* m3_api_libc.c */,
-				F4F4C11C23C490440098C4DA /* m3_api_libc.h */,
-				F4F4C10B23C490430098C4DA /* m3_api_wasi.c */,
-				F4F4C11623C490440098C4DA /* m3_api_wasi.h */,
-				F4F4C10323C490430098C4DA /* m3_bind.c */,
-				F4F4C11923C490440098C4DA /* m3_code.c */,
-				F4F4C10523C490430098C4DA /* m3_code.h */,
-				F4F4C10023C490430098C4DA /* m3_compile.c */,
-				F4F4C11323C490430098C4DA /* m3_compile.h */,
-				F4F4C11823C490440098C4DA /* m3_config_platforms.h */,
-				F4F4C11423C490430098C4DA /* m3_config.h */,
-				F4F4C11023C490430098C4DA /* m3_core.c */,
-				F4F4C10A23C490430098C4DA /* m3_core.h */,
-				F4F4C10823C490430098C4DA /* m3_emit.c */,
-				F4F4C10C23C490430098C4DA /* m3_emit.h */,
-				F4F4C10D23C490430098C4DA /* m3_env.c */,
-				F4F4C11523C490430098C4DA /* m3_env.h */,
-				F4F4C11A23C490440098C4DA /* m3_exception.h */,
-				F4F4C11D23C490440098C4DA /* m3_exec_defs.h */,
-				F4F4C10723C490430098C4DA /* m3_exec.c */,
-				F4F4C11723C490440098C4DA /* m3_exec.h */,
-				F4F4C10F23C490430098C4DA /* m3_info.c */,
-				F4F4C10623C490430098C4DA /* m3_info.h */,
-				F4F4C10223C490430098C4DA /* m3_math_utils.h */,
-				F4F4C10E23C490430098C4DA /* m3_module.c */,
-				F4F4C10123C490430098C4DA /* m3_optimize.c */,
-				F4F4C11123C490430098C4DA /* m3_parse.c */,
-				F4F4C11B23C490440098C4DA /* m3.h */,
 				E6054A8D23C857D4006F3FE1 /* m3_api_bgfx_gen.c */,
+				CADEE60B23C97F13004663B9 /* m3_api_env.h */,
+				CADEE60C23C97F13004663B9 /* m3_api_env.c */,
+				CADEE60E23CC0EDC004663B9 /* emscripten_fetch.h */,
+				CADEE60F23CC0EDC004663B9 /* emscripten_fetch.mm */,
 			);
 			path = wasm3;
-			sourceTree = "<group>";
-		};
-		F4F4C12C23C490550098C4DA /* extra */ = {
-			isa = PBXGroup;
-			children = (
-				F4F4C12F23C490670098C4DA /* fib32_tail.wasm.h */,
-				F4F4C13023C490670098C4DA /* fib32.wasm.h */,
-				F4F4C12E23C490670098C4DA /* fib64.wasm.h */,
-				F4F4C12D23C490670098C4DA /* wasi_core.h */,
-			);
-			path = extra;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,42 +177,6 @@
 			productReference = F4F4C0C823C48DDA0098C4DA /* wams3test.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F4F4C0DF23C48DDB0098C4DA /* wams3testTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F4F4C0F723C48DDB0098C4DA /* Build configuration list for PBXNativeTarget "wams3testTests" */;
-			buildPhases = (
-				F4F4C0DC23C48DDB0098C4DA /* Sources */,
-				F4F4C0DD23C48DDB0098C4DA /* Frameworks */,
-				F4F4C0DE23C48DDB0098C4DA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F4F4C0E223C48DDB0098C4DA /* PBXTargetDependency */,
-			);
-			name = wams3testTests;
-			productName = wams3testTests;
-			productReference = F4F4C0E023C48DDB0098C4DA /* wams3testTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		F4F4C0EA23C48DDB0098C4DA /* wams3testUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F4F4C0FA23C48DDB0098C4DA /* Build configuration list for PBXNativeTarget "wams3testUITests" */;
-			buildPhases = (
-				F4F4C0E723C48DDB0098C4DA /* Sources */,
-				F4F4C0E823C48DDB0098C4DA /* Frameworks */,
-				F4F4C0E923C48DDB0098C4DA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F4F4C0ED23C48DDB0098C4DA /* PBXTargetDependency */,
-			);
-			name = wams3testUITests;
-			productName = wams3testUITests;
-			productReference = F4F4C0EB23C48DDB0098C4DA /* wams3testUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -340,14 +188,6 @@
 				TargetAttributes = {
 					F4F4C0C723C48DDA0098C4DA = {
 						CreatedOnToolsVersion = 10.3;
-					};
-					F4F4C0DF23C48DDB0098C4DA = {
-						CreatedOnToolsVersion = 10.3;
-						TestTargetID = F4F4C0C723C48DDA0098C4DA;
-					};
-					F4F4C0EA23C48DDB0098C4DA = {
-						CreatedOnToolsVersion = 10.3;
-						TestTargetID = F4F4C0C723C48DDA0098C4DA;
 					};
 				};
 			};
@@ -365,8 +205,6 @@
 			projectRoot = "";
 			targets = (
 				F4F4C0C723C48DDA0098C4DA /* wams3test */,
-				F4F4C0DF23C48DDB0098C4DA /* wams3testTests */,
-				F4F4C0EA23C48DDB0098C4DA /* wams3testUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -376,25 +214,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6054A8923C742A8006F3FE1 /* main.wasm in Resources */,
 				F4F4C0D823C48DDB0098C4DA /* LaunchScreen.storyboard in Resources */,
 				F4F4C0D523C48DDB0098C4DA /* Assets.xcassets in Resources */,
-				E6FC6F6E23C58E42003255FA /* helloworld in Resources */,
 				F4F4C0D323C48DDA0098C4DA /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F4F4C0DE23C48DDB0098C4DA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F4F4C0E923C48DDB0098C4DA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,57 +227,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4F4C12323C490440098C4DA /* m3_api_libc.c in Sources */,
-				F4F4C12723C490440098C4DA /* m3_info.c in Sources */,
+				CADEE60D23C97F13004663B9 /* m3_api_env.c in Sources */,
 				E6054A8E23C857D5006F3FE1 /* m3_api_bgfx_gen.c in Sources */,
-				F4F4C12523C490440098C4DA /* m3_env.c in Sources */,
-				F4F4C12223C490440098C4DA /* m3_emit.c in Sources */,
-				F4F4C12B23C490440098C4DA /* m3_code.c in Sources */,
-				F4F4C12423C490440098C4DA /* m3_api_wasi.c in Sources */,
-				F4F4C12123C490440098C4DA /* m3_exec.c in Sources */,
 				F4F4C0D023C48DDA0098C4DA /* ViewController.mm in Sources */,
-				F4F4C11E23C490440098C4DA /* m3_compile.c in Sources */,
-				F4F4C12823C490440098C4DA /* m3_core.c in Sources */,
-				F4F4C12923C490440098C4DA /* m3_parse.c in Sources */,
 				F4F4C0DB23C48DDB0098C4DA /* main.m in Sources */,
-				F4F4C11F23C490440098C4DA /* m3_optimize.c in Sources */,
 				E6CC489323C88D35002BBDB9 /* m3_api_bgfx.c in Sources */,
-				F4F4C12623C490440098C4DA /* m3_module.c in Sources */,
-				F4F4C12023C490440098C4DA /* m3_bind.c in Sources */,
+				CADEE61023CC0EDC004663B9 /* emscripten_fetch.mm in Sources */,
 				F4F4C0CD23C48DDA0098C4DA /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F4F4C0DC23C48DDB0098C4DA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F4F4C0E523C48DDB0098C4DA /* wams3testTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F4F4C0E723C48DDB0098C4DA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F4F4C0F023C48DDB0098C4DA /* wams3testUITests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		F4F4C0E223C48DDB0098C4DA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F4F4C0C723C48DDA0098C4DA /* wams3test */;
-			targetProxy = F4F4C0E123C48DDB0098C4DA /* PBXContainerItemProxy */;
-		};
-		F4F4C0ED23C48DDB0098C4DA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F4F4C0C723C48DDA0098C4DA /* wams3test */;
-			targetProxy = F4F4C0EC23C48DDB0098C4DA /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F4F4C0D123C48DDA0098C4DA /* Main.storyboard */ = {
@@ -604,20 +386,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MV38XSKV68;
+				DEVELOPMENT_TEAM = HF2FYPC92D;
 				GCC_INPUT_FILETYPE = automatic;
 				HEADER_SEARCH_PATHS = (
 					../bx/include,
+					../wasm3/source,
 					../bgfx/include,
-					source,
 				);
 				INFOPLIST_FILE = wams3test/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"../bgfx/.build/ios-arm64/bin",
+					"../wasm3/build/Debug-iphoneos",
+				);
 				OTHER_CFLAGS = "-Dd_m3HasWASI";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zorro.testunity.wams3test11;
+				PRODUCT_BUNDLE_IDENTIFIER = kgdev.wasm3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -628,96 +414,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MV38XSKV68;
+				DEVELOPMENT_TEAM = HF2FYPC92D;
 				GCC_INPUT_FILETYPE = automatic;
 				HEADER_SEARCH_PATHS = (
 					../bx/include,
+					../wasm3/source,
 					../bgfx/include,
-					source,
 				);
 				INFOPLIST_FILE = wams3test/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"../bgfx/.build/ios-arm64/bin",
+					"../wasm3/build/Debug-iphoneos",
+				);
 				OTHER_CFLAGS = "-Dd_m3HasWASI";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zorro.testunity.wams3test11;
+				PRODUCT_BUNDLE_IDENTIFIER = kgdev.wasm3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		F4F4C0F823C48DDB0098C4DA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z6SFPV59E3;
-				INFOPLIST_FILE = wams3testTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zorro.testunity.wams3testTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/wams3test.app/wams3test";
-			};
-			name = Debug;
-		};
-		F4F4C0F923C48DDB0098C4DA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z6SFPV59E3;
-				INFOPLIST_FILE = wams3testTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zorro.testunity.wams3testTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/wams3test.app/wams3test";
-			};
-			name = Release;
-		};
-		F4F4C0FB23C48DDB0098C4DA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z6SFPV59E3;
-				INFOPLIST_FILE = wams3testUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zorro.testunity.wams3testUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = wams3test;
-			};
-			name = Debug;
-		};
-		F4F4C0FC23C48DDB0098C4DA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z6SFPV59E3;
-				INFOPLIST_FILE = wams3testUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zorro.testunity.wams3testUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = wams3test;
 			};
 			name = Release;
 		};
@@ -738,24 +454,6 @@
 			buildConfigurations = (
 				F4F4C0F523C48DDB0098C4DA /* Debug */,
 				F4F4C0F623C48DDB0098C4DA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F4F4C0F723C48DDB0098C4DA /* Build configuration list for PBXNativeTarget "wams3testTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F4F4C0F823C48DDB0098C4DA /* Debug */,
-				F4F4C0F923C48DDB0098C4DA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F4F4C0FA23C48DDB0098C4DA /* Build configuration list for PBXNativeTarget "wams3testUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F4F4C0FB23C48DDB0098C4DA /* Debug */,
-				F4F4C0FC23C48DDB0098C4DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

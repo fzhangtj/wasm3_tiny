@@ -22,6 +22,7 @@ static    void* m_device = NULL;
 #include "m3_api_wasi.h"
 #include "m3_api_libc.h"
 #include "m3_api_bgfx.h"
+#include "m3_api_env.h"
 
 #include "m3_env.h"
 
@@ -38,7 +39,7 @@ extern "C"
         }
     }
     
-M3Result repl_init(IM3Environment env, IM3Runtime* runtime)
+    M3Result repl_init(IM3Environment env, IM3Runtime* runtime)
     {
         repl_free(runtime);
         *runtime = m3_NewRuntime (env, 64*1024, NULL);
@@ -60,31 +61,15 @@ M3Result repl_init(IM3Environment env, IM3Runtime* runtime)
         if (result) return result;
 
         return result;
-}
-
-    M3Result init_call  (IM3Runtime runtime)
-    {
-        M3Result result = m3Err_none;
-
-        IM3Function func;
-        result = m3_FindFunction (&func, runtime, "do_init");
-        if (result) return result;
-
-        result = m3_CallWithArgs (func, 0, nil);
-        if (result) return result;
-
-        return result;
     }
+   
     
     M3Result repl_load  (IM3Runtime runtime, const char* fn, void* whandle)
     {
         M3Result result = m3Err_none;
         
-        NSString* path = [[NSBundle mainBundle] pathForResource:@"main"
-        ofType:@"wasm"];
-        
-        NSURL *fileUrl = [NSURL fileURLWithPath:path];
-        NSData *fileData = [NSData dataWithContentsOfURL:fileUrl];
+        NSURL *fileUrl = [NSURL URLWithString:@"http://10.86.98.112:8080/MoleTiny3D.wasm"];
+        static NSData *fileData = [NSData dataWithContentsOfURL:fileUrl];
         
         u8* wasm = (u8*)fileData.bytes;
         u32 fsize = fileData.length;
@@ -101,18 +86,19 @@ M3Result repl_init(IM3Environment env, IM3Runtime* runtime)
 
         result = m3_LinkLibC (runtime->modules);
         if (result) FATAL("m3_LinkLibC: %s", result);
+        
+        result = m3_LinkENV (runtime->modules);
+        if (result) FATAL("m3_LinkENV: %s", result);
 
         //[self View]
         result = m3_LinkBGFX (runtime->modules, whandle);
-        if (result) FATAL("m3_LinkLibC: %s", result);
+        if (result) FATAL("m3_LinkBGFX: %s", result);
         
         result = m3_InitMallocFunc(runtime);
-        if (result) FATAL("m3_LinkLibC: %s", result);
+        if (result) FATAL("m3_InitMallocFunc: %s", result);
 
         //m3_InitMallocFunc
         result = repl_call(runtime, "_start");
-        
-        init_call(runtime);
         
         return result;
     }
@@ -148,6 +134,8 @@ M3Result repl_init(IM3Environment env, IM3Runtime* runtime)
     {
         return nil;
     }
+    
+
     return self;
 }
 
@@ -162,11 +150,11 @@ M3Result repl_init(IM3Environment env, IM3Runtime* runtime)
 {
     if (nil == m_displayLink)
     {
-        m_displayLink = [self.window.screen displayLinkWithTarget:self selector:@selector(renderFrame)];
-        //[m_displayLink setFrameInterval:1];
+        m_displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(renderFrame)];
         //[m_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         //        [m_displayLink addToRunLoop:[NSRunLoop currentRunLoop]];
         [m_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+        //[m_displayLink setPreferredFramesPerSecond:60];
     }
 }
 
@@ -181,6 +169,8 @@ M3Result repl_init(IM3Environment env, IM3Runtime* runtime)
 
 - (void)renderFrame
 {
+    runAnimationFrame(0.0);
+    
    // bgfx::renderFrame();
 }
 
@@ -213,13 +203,9 @@ M3Result repl_init(IM3Environment env, IM3Runtime* runtime)
     result = repl_load(runtime, "", (__bridge void*) self.view.layer);
     if (result) FATAL("repl_load: %s", result);
     
-    result = m3_LinkWASI (runtime->modules);
-    if (result) FATAL("m3_LinkWASI: %s", result);
-    
-    result = m3_LinkLibC (runtime->modules);
-    if (result) FATAL("m3_LinkLibC: %s", result);
-
     printf("Finish Wasm3 Init!!");
+    
+    [(View *)self.view  start];
 }
 
 

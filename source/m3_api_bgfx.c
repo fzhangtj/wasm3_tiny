@@ -8,11 +8,18 @@
 #include<bgfx/c99/bgfx.h>
 #include "m3_api_bgfx.h"
 
+# if defined(__cplusplus)
+extern "C" {
+# endif
+    
 #include "m3_api_wasi.h"
 
 #include "m3_api_defs.h"
 #include "m3_env.h"
 #include "m3_exception.h"
+    
+    
+    
 #include <stdlib.h>
 #include <string.h>
 #define FATAL(msg, ...) { printf("Error: [Fatal] " msg "\n", ##__VA_ARGS__); }
