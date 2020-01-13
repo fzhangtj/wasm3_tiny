@@ -69,6 +69,15 @@ static void to_bgfx_init_t(bgfx_init_t * dest, wasm_bgfx_init_t *src) {
     to_bgfx_init_t(NAME, _wasm_NAME); \
 NAME->platformData.nwh = whandle;
 
+#define m3BgfxApiGetPlatformDataArg(NAME) \
+    m3ApiGetArgMem(wasm_bgfx_platform_data_t*, _wasm_NAME) \
+    bgfx_platform_data_t _val_NAME;\
+    bgfx_platform_data_t* NAME = &_val_NAME; \
+    memset(NAME, 0, sizeof(bgfx_platform_data_t)); \
+NAME->nwh = whandle;
+
+
+
 # if defined(__cplusplus)
 extern "C" {
 # endif
