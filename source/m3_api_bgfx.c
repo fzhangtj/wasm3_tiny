@@ -24,12 +24,6 @@ extern "C" {
 #include <string.h>
 #define FATAL(msg, ...) { printf("Error: [Fatal] " msg "\n", ##__VA_ARGS__); }
 
-typedef struct bgfx_memory_s_wasm
-{
-    u32             data;               /** Pointer to data.                         */
-    uint32_t        size;               /** Data size.                               */
-} bgfx_memory_s_wasm;
-
 u32 bgfxmemory_t_to_wasm(bgfx_memory_t *mem_block, u8* _mem) {
     u32 ptr = (u8 *)mem_block - _mem;
     bgfx_memory_s_wasm *mem_block_wasm = (bgfx_memory_s_wasm *)mem_block;
@@ -50,7 +44,7 @@ bgfx_memory_t* bgfxmemory_t_from_wasm(u32 ptr, u8* _mem) {
 }
 
 
-static IM3Function mallocFunc;
+IM3Function mallocFunc;
 
 M3Result m3_InitMallocFunc(IM3Runtime runtime) {
     M3Result result = m3_FindFunction (&mallocFunc, runtime, "malloc");
@@ -100,6 +94,18 @@ m3ApiRawFunction(m3_bgfx_get_caps)
     m3ApiReturn(capsPtr)
     return m3Err_none;
 }
+    
+    m3ApiRawFunction(m3_bgfx_dbg_text_printf)
+    {
+        m3ApiGetArg(i32, arg0)
+        m3ApiGetArg(i32, arg1)
+        m3ApiGetArg(i32, arg2)
+        m3ApiGetArgMem(char *, arg3)
+        m3ApiGetArg(i32, arg4)
+        
+        printf("m3_bgfx_dbg_text_printf: %s", arg3);
+        return m3Err_none;
+    }
    
     static
     M3Result SuppressLookupFailure(M3Result i_result)
@@ -115,8 +121,9 @@ m3ApiRawFunction(m3_bgfx_get_caps)
     {
         M3Result result = m3Err_none;
 
-        (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_get_caps", "*()", &m3_bgfx_get_caps)));
-        
+_        (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_get_caps", "*()", &m3_bgfx_get_caps)));
+_        (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_dbg_text_printf", "v(iiiii)", &m3_bgfx_dbg_text_printf)));
+
         m3_LinkBGFX_Gen  (module, handle);
 
         

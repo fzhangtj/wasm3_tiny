@@ -8,6 +8,8 @@
 
 static void* whandle;
 
+    
+bgfx_encoder_t *__encoder;
 
 
 m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
@@ -88,12 +90,26 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	
 	m3ApiRawFunction(m3_bgfx_copy)
 	{
-	m3ApiReturnType(ptr32)
+        M3Result result = m3Err_none;
+        
+        m3ApiReturnType(ptr32)
 		m3ApiGetArgMem   (const void*       , _bgfx__data)
 		m3ApiGetArg   (uint32_t       , _bgfx__size)
-	const bgfx_memory_t* ret = bgfx_copy(_bgfx__data, _bgfx__size);
-	m3ApiReturn(ret)
-	return m3Err_none;
+        
+        static u64 ptr = 0;
+        u64 malloc_args[] = {sizeof(bgfx_memory_t) + _bgfx__size};
+_       (m3_CallDirect(mallocFunc, malloc_args, &ptr))
+        
+        bgfx_memory_s_wasm *mem_block_wasm = (bgfx_memory_s_wasm *)(ptr + _mem);
+        mem_block_wasm->size = _bgfx__size;
+        mem_block_wasm->data = ptr + sizeof(bgfx_memory_t);
+        
+        memcpy(ptr + sizeof(bgfx_memory_t) + _mem, _bgfx__data, _bgfx__size);
+
+        m3ApiReturn(ptr)
+        
+    _catch:
+        return result;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_set_debug)
@@ -114,7 +130,8 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	m3ApiRawFunction(m3_bgfx_create_index_buffer)
 	{
 	m3ApiReturnType(ptr32)
-		m3ApiGetArgMem   (const bgfx_memory_t*       , _bgfx__mem)
+        m3ApiGetArg   (u32       , _bgfx__mem_ptr)
+        bgfx_memory_t *_bgfx__mem = bgfxmemory_t_from_wasm(_bgfx__mem_ptr, _mem);
 		m3ApiGetArg   (uint16_t       , _bgfx__flags)
 	bgfx_index_buffer_handle_t ret = bgfx_create_index_buffer(_bgfx__mem, _bgfx__flags);
 	m3ApiReturn(bgfx_handle_to_idx(ret))
@@ -133,9 +150,12 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	m3ApiRawFunction(m3_bgfx_create_vertex_buffer)
 	{
 	m3ApiReturnType(ptr32)
-		m3ApiGetArgMem   (const bgfx_memory_t*       , _bgfx__mem)
+        m3ApiGetArg   (u32       , _bgfx__mem_ptr)
 		m3ApiGetArgMem   (const bgfx_vertex_layout_t *       , _bgfx__layout)
 		m3ApiGetArg   (uint16_t       , _bgfx__flags)
+        
+            bgfx_memory_t *_bgfx__mem = bgfxmemory_t_from_wasm(_bgfx__mem_ptr, _mem);
+        
 	bgfx_vertex_buffer_handle_t ret = bgfx_create_vertex_buffer(_bgfx__mem, _bgfx__layout, _bgfx__flags);
 	m3ApiReturn(bgfx_handle_to_idx(ret))
 	return m3Err_none;
@@ -157,7 +177,10 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	m3ApiRawFunction(m3_bgfx_create_shader)
 	{
 	m3ApiReturnType(ptr32)
-		m3ApiGetArgMem   (const bgfx_memory_t*       , _bgfx__mem)
+		m3ApiGetArg   (u32       , _bgfx__mem_ptr)
+        
+        bgfx_memory_t *_bgfx__mem = bgfxmemory_t_from_wasm(_bgfx__mem_ptr, _mem);
+        
 	bgfx_shader_handle_t ret = bgfx_create_shader(_bgfx__mem);
 	m3ApiReturn(bgfx_handle_to_idx(ret))
 	return m3Err_none;
@@ -192,7 +215,11 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 		m3ApiGetArg   (uint16_t       , _bgfx__numLayers)
 		m3ApiGetArg   (bgfx_texture_format_t       , _bgfx__format)
 		m3ApiGetArg   (uint64_t       , _bgfx__flags)
-		m3ApiGetArgMem   (const bgfx_memory_t*       , _bgfx__mem)
+        m3ApiGetArg   (u32       , _bgfx__mem_ptr)
+
+
+        bgfx_memory_t *_bgfx__mem = bgfxmemory_t_from_wasm(_bgfx__mem_ptr, _mem);
+        
 	bgfx_texture_handle_t ret = bgfx_create_texture_2d(_bgfx__width, _bgfx__height, _bgfx__hasMips, _bgfx__numLayers, _bgfx__format, _bgfx__flags, _bgfx__mem);
 	m3ApiReturn(bgfx_handle_to_idx(ret))
 	return m3Err_none;
@@ -284,20 +311,21 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	bgfx_set_view_transform(_bgfx__id, _bgfx__view, _bgfx__proj);
 	return m3Err_none;
 	}
-	
+
+
 	m3ApiRawFunction(m3_bgfx_encoder_begin)
 	{
 	m3ApiReturnType(ptr32)
 		m3ApiGetArg   (bool       , _bgfx__forThread)
-	bgfx_encoder_t* ret = bgfx_encoder_begin(_bgfx__forThread);
-	m3ApiReturn(ret)
+	__encoder = bgfx_encoder_begin(_bgfx__forThread);
+	m3ApiReturn(1)
 	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_encoder_end)
 	{
 		m3ApiGetArgMem   (bgfx_encoder_t*       , _bgfx__encoder)
-	bgfx_encoder_end(_bgfx__encoder);
+	bgfx_encoder_end(__encoder);
 	return m3Err_none;
 	}
 	
@@ -306,7 +334,7 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 		m3ApiGetArgMem   (bgfx_encoder_t*       , _bgfx_this)
 		m3ApiGetArg   (uint64_t       , _bgfx__state)
 		m3ApiGetArg   (uint32_t       , _bgfx__rgba)
-	bgfx_encoder_set_state(_bgfx_this, _bgfx__state, _bgfx__rgba);
+	bgfx_encoder_set_state(__encoder, _bgfx__state, _bgfx__rgba);
 	return m3Err_none;
 	}
 	
@@ -316,7 +344,7 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 		m3ApiGetArgMem   (bgfx_encoder_t*       , _bgfx_this)
 		m3ApiGetArgMem   (const void*       , _bgfx__mtx)
 		m3ApiGetArg   (uint16_t       , _bgfx__num)
-	uint32_t ret = bgfx_encoder_set_transform(_bgfx_this, _bgfx__mtx, _bgfx__num);
+	uint32_t ret = bgfx_encoder_set_transform(__encoder, _bgfx__mtx, _bgfx__num);
 	m3ApiReturn(ret)
 	return m3Err_none;
 	}
@@ -327,7 +355,7 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 		m3ApiGetArg   (bgfx_uniform_handle_t       , _bgfx__handle)
 		m3ApiGetArgMem   (const void*       , _bgfx__value)
 		m3ApiGetArg   (uint16_t       , _bgfx__num)
-	bgfx_encoder_set_uniform(_bgfx_this, _bgfx__handle, _bgfx__value, _bgfx__num);
+	bgfx_encoder_set_uniform(__encoder, _bgfx__handle, _bgfx__value, _bgfx__num);
 	return m3Err_none;
 	}
 	
@@ -337,7 +365,7 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 		m3ApiGetArg   (bgfx_index_buffer_handle_t       , _bgfx__handle)
 		m3ApiGetArg   (uint32_t       , _bgfx__firstIndex)
 		m3ApiGetArg   (uint32_t       , _bgfx__numIndices)
-	bgfx_encoder_set_index_buffer(_bgfx_this, _bgfx__handle, _bgfx__firstIndex, _bgfx__numIndices);
+	bgfx_encoder_set_index_buffer(__encoder, _bgfx__handle, _bgfx__firstIndex, _bgfx__numIndices);
 	return m3Err_none;
 	}
 	
@@ -349,7 +377,7 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 		m3ApiGetArg   (uint32_t       , _bgfx__startVertex)
 		m3ApiGetArg   (uint32_t       , _bgfx__numVertices)
 		m3ApiGetArg   (bgfx_vertex_layout_handle_t       , _bgfx__layoutHandle)
-	bgfx_encoder_set_vertex_buffer(_bgfx_this, _bgfx__stream, _bgfx__handle, _bgfx__startVertex, _bgfx__numVertices, _bgfx__layoutHandle);
+	bgfx_encoder_set_vertex_buffer(__encoder, _bgfx__stream, _bgfx__handle, _bgfx__startVertex, _bgfx__numVertices, _bgfx__layoutHandle);
 	return m3Err_none;
 	}
 	
@@ -360,7 +388,7 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 		m3ApiGetArg   (bgfx_uniform_handle_t       , _bgfx__sampler)
 		m3ApiGetArg   (bgfx_texture_handle_t       , _bgfx__handle)
 		m3ApiGetArg   (uint32_t       , _bgfx__flags)
-	bgfx_encoder_set_texture(_bgfx_this, _bgfx__stage, _bgfx__sampler, _bgfx__handle, _bgfx__flags);
+	bgfx_encoder_set_texture(__encoder, _bgfx__stage, _bgfx__sampler, _bgfx__handle, _bgfx__flags);
 	return m3Err_none;
 	}
 	
@@ -371,7 +399,7 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 		m3ApiGetArg   (bgfx_program_handle_t       , _bgfx__program)
 		m3ApiGetArg   (uint32_t       , _bgfx__depth)
 		m3ApiGetArg   (bool       , _bgfx__preserveState)
-	bgfx_encoder_submit(_bgfx_this, _bgfx__id, _bgfx__program, _bgfx__depth, _bgfx__preserveState);
+	bgfx_encoder_submit(__encoder, _bgfx__id, _bgfx__program, _bgfx__depth, _bgfx__preserveState);
 	return m3Err_none;
 	}
 	
@@ -506,7 +534,7 @@ M3Result  m3_LinkBGFX_Gen  (IM3Module module, void* handle)
 	
 	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_vertex_buffer", "*(**i)", &m3_bgfx_create_vertex_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_alloc_transient_buffers", "i(**i*i)", &m3_bgfx_alloc_transient_buffers)));
+	   //(SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_alloc_transient_buffers", "i(**i*i)", &m3_bgfx_alloc_transient_buffers)));
 	
 	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_shader", "*(*)", &m3_bgfx_create_shader)));
 	

@@ -82,9 +82,16 @@ NAME->nwh = whandle;
 extern "C" {
 # endif
 
+extern IM3Function mallocFunc;
+
     M3Result    m3_LinkBGFX     (IM3Module io_module, void* handle);
     M3Result m3_InitMallocFunc(IM3Runtime runtime) ;
 
+typedef struct bgfx_memory_s_wasm
+{
+    u32             data;               /** Pointer to data.                         */
+    uint32_t        size;               /** Data size.                               */
+} bgfx_memory_s_wasm;
 
 u32 bgfxmemory_t_to_wasm(bgfx_memory_t *mem_block, u8* _mem);
 bgfx_memory_t* bgfxmemory_t_from_wasm(u32 ptr, u8* _mem);
