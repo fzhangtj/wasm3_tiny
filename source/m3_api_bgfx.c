@@ -25,6 +25,10 @@ extern "C" {
 #define FATAL(msg, ...) { printf("Error: [Fatal] " msg "\n", ##__VA_ARGS__); }
 
 u32 bgfxmemory_t_to_wasm(bgfx_memory_t *mem_block, u8* _mem) {
+    if (mem_block == NULL) {
+        return 0;
+    }
+    
     u32 ptr = (u8 *)mem_block - _mem;
     bgfx_memory_s_wasm *mem_block_wasm = (bgfx_memory_s_wasm *)mem_block;
     
@@ -35,6 +39,10 @@ u32 bgfxmemory_t_to_wasm(bgfx_memory_t *mem_block, u8* _mem) {
 }
 
 bgfx_memory_t* bgfxmemory_t_from_wasm(u32 ptr, u8* _mem) {
+    if (ptr == 0) {
+        return NULL;
+    }
+    
     bgfx_memory_s_wasm *mem_block_wasm = (bgfx_memory_s_wasm *)(ptr + _mem);
     bgfx_memory_t *mem_block = (bgfx_memory_t *)(ptr + _mem);
     
