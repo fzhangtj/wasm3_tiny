@@ -66,7 +66,8 @@ m3ApiRawFunction(__syscall4)
     char *buf = (char *)m3ApiOffsetToPtr(args[1]);
     size_t nbyte = args[2];
 
-    m3ApiReturn(write(fd, buf, nbyte));
+    size_t ret = write(fd, buf, nbyte);
+    m3ApiReturn(ret);
 }
 
 typedef struct AnimationFrameCallback

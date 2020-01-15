@@ -16,6 +16,17 @@
 typedef uint32_t ptr32;
 
 #define bgfx_handle_to_idx(handle) (handle.idx)
+#define BGFX_CALL_TRACE(method) printf("BGFX_CALL_TRACE %s\n", method)
+
+typedef struct bgfx_memory_s_wasm
+{
+    u32             data;               /** Pointer to data.                         */
+    uint32_t        size;               /** Data size.                               */
+} bgfx_memory_s_wasm;
+
+u32 bgfxmemory_t_to_wasm(bgfx_memory_t *mem_block, u8* _mem) ;
+
+bgfx_memory_t* bgfxmemory_t_from_wasm(u32 ptr, u8* _mem) ;
 
 typedef struct wasm_bgfx_platform_data
 {
@@ -77,6 +88,10 @@ NAME->platformData.nwh = whandle;
 NAME->nwh = whandle;
 
 
+#define m3BgfxApiMemoryArg(NAME) \
+    m3ApiGetArg(uint32_t*, _ptr_NAME) \
+    bgfx_memory_t* NAME = bgfxmemory_t_from_wasm(_ptr_NAME, _mem);
+
 
 # if defined(__cplusplus)
 extern "C" {
@@ -89,5 +104,6 @@ extern "C" {
 }
 
 # endif
+
 
 #endif /* m3_api_bgfx_h */
