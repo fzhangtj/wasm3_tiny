@@ -16,17 +16,45 @@
 typedef uint32_t ptr32;
 
 #define bgfx_handle_to_idx(handle) (handle.idx)
-#define BGFX_CALL_TRACE(method) printf("BGFX_CALL_TRACE %s\n", method)
-
+//#define BGFX_CALL_TRACE(method) printf("BGFX_CALL_TRACE %s\n", method)
+#define BGFX_CALL_TRACE
 typedef struct bgfx_memory_s_wasm
 {
     u32             data;               /** Pointer to data.                         */
     uint32_t        size;               /** Data size.                               */
 } bgfx_memory_s_wasm;
 
+typedef struct bgfx_transient_index_buffer_s_wasm
+{
+    ptr32             data;               /** Pointer to data.                         */
+    uint32_t             size;               /** Data size.                               */
+    uint32_t             startIndex;         /** First index.                             */
+    bgfx_index_buffer_handle_t handle;       /** Index buffer handle.                     */
+
+} bgfx_transient_index_buffer_t_wasm;
+
+typedef struct bgfx_transient_vertex_buffer_s_wasm
+{
+    ptr32            data;               /** Pointer to data.                         */
+    uint32_t             size;               /** Data size.                               */
+    uint32_t             startVertex;        /** First vertex.                            */
+    uint16_t             stride;             /** Vertex stride.                           */
+    bgfx_vertex_buffer_handle_t handle;      /** Vertex buffer handle.                    */
+    bgfx_vertex_layout_handle_t layoutHandle; /** Vertex layout handle.                    */
+
+} bgfx_transient_vertex_buffer_t_wasm;
+
 u32 bgfxmemory_t_to_wasm(bgfx_memory_t *mem_block, u8* _mem) ;
 
 bgfx_memory_t* bgfxmemory_t_from_wasm(u32 ptr, u8* _mem) ;
+
+void wasm_to_transient_index_buffer_s(bgfx_transient_index_buffer_t* dest, bgfx_transient_index_buffer_t_wasm* source, u8* _mem);
+    
+void transient_index_buffer_s_to_wasm(bgfx_transient_index_buffer_t_wasm* dest,  bgfx_transient_index_buffer_t* source, u8* _mem);
+    
+void wasm_to_transient_vertex_buffer_s(bgfx_transient_vertex_buffer_t* dest, bgfx_transient_vertex_buffer_t_wasm* source, u8* _mem);
+    
+void transient_vertex_buffer_s_to_wasm(bgfx_transient_vertex_buffer_t_wasm* dest,  bgfx_transient_vertex_buffer_t* source, u8* _mem);
 
 typedef struct wasm_bgfx_platform_data
 {
@@ -92,6 +120,32 @@ NAME->nwh = whandle;
     m3ApiGetArg(uint32_t*, _ptr_NAME) \
     bgfx_memory_t* NAME = bgfxmemory_t_from_wasm(_ptr_NAME, _mem);
 
+#define m3BgfxApiTransientIndexBufferArg(NAME) \
+    m3ApiGetArg(bgfx_transient_index_buffer_t_wasm*, _wasm_NAME) \
+    bgfx_transient_index_buffer_t _val_NAME; \
+    bgfx_transient_index_buffer_t* NAME = &_val_NAME; \
+    wasm_to_transient_index_buffer_s(NAME, _wasm_NAME, _mem);
+
+#define m3BgfxApiTransientVertexBufferArg(NAME) \
+    m3ApiGetArg(bgfx_transient_vertex_buffer_t_wasm*, _wasm_NAME) \
+    bgfx_transient_vertex_buffer_t _val_NAME; \
+    bgfx_transient_vertex_buffer_t* NAME = &_val_NAME; \
+    wasm_to_vertex_index_buffer_s(NAME, _wasm_NAME, _mem);
+ //   bgfx_memory_t* NAME = bgfxmemory_t_from_wasm(_ptr_NAME, _mem);
+
+//#define m3BgfxApiGetTransientIndexBufferArg(NAME) \
+//    m3ApiGetArgMem(bgfx_transient_index_buffer_s_wasm*, _wasm_NAME) \
+//    bgfx_transient_index_buffer
+
+/*
+// typedef struct bgfx_transient_index_buffer_s_wasm
+// {
+//     ptr32             data;               /** Pointer to data.                         */
+//     uint32_t             size;               /** Data size.                               */
+//     uint32_t             startIndex;         /** First index.                             */
+//     bgfx_index_buffer_handle_t handle;       /** Index buffer handle.                     */
+//
+// } bgfx_transient_index_buffer_t_wasm;
 
 # if defined(__cplusplus)
 extern "C" {

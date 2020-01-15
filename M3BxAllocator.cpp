@@ -52,7 +52,7 @@ public:
 
 
 void* m3_bgfx_allocator(bgfx_allocator_interface_t* _this, void* _ptr, size_t _size, size_t _align, const char* _file, uint32_t _line) {
-    u8* _mem = (u8*)(runtime->memory.mallocated);
+    u8* _mem = m3MemData(runtime->memory.mallocated);
     M3AllocatorC99 d;
     d.m_interface =_this;
     if (0 == _size)

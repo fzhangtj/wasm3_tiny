@@ -33,8 +33,8 @@ static IM3Function mallocFunc;
 static IM3Function reallocFunc;
 static IM3Function freeFunc;
 
-    extern  void InitAllocator(IM3Runtime _runtime) ;
-    extern  bgfx_allocator_interface_t* GetAllocator();
+extern  void InitAllocator(IM3Runtime _runtime) ;
+extern  bgfx_allocator_interface_t* GetAllocator();
 M3Result m3_InitMallocFunc(IM3Runtime runtime) {
     M3Result result = m3_FindFunction (&mallocFunc, runtime, "malloc");
 
@@ -43,6 +43,7 @@ M3Result m3_InitMallocFunc(IM3Runtime runtime) {
 
     return result;
 }
+    
 
 ptr32 m3_InvokeMallocFunc(int size) {
     u64 bytePtr;
@@ -52,7 +53,7 @@ ptr32 m3_InvokeMallocFunc(int size) {
     if (result) {
         FATAL("m3_InvokeFreeFunc: %s", result);
     }
-    printf("alloc_call m3_InvokeMallocFunc %d %p\n", (u32)bytePtr, mallocFunc->module->runtime->memory.mallocated);
+//    printf("alloc_call m3_InvokeMallocFunc %d %p\n", (u32)bytePtr, mallocFunc->module->runtime->memory.mallocated);
     return (ptr32)bytePtr;
 }
     
@@ -61,7 +62,7 @@ void m3_InvokeFreeFunc(ptr32 p) {
     u64 free_args[] = {p};
    // *((ptr32*)free_args) = p;
     M3Result result =  m3_CallDirect(freeFunc, free_args, NULL);
-    printf("alloc_call m3_InvokeFreeFunc %d %p\n", p, freeFunc->module->runtime->memory.mallocated);
+//    printf("alloc_call m3_InvokeFreeFunc %d %p\n", p, freeFunc->module->runtime->memory.mallocated);
     if (result) {
         FATAL("m3_InvokeFreeFunc: %s", result);
     }
@@ -76,8 +77,8 @@ ptr32 m3_InvokeReallocFunc(ptr32 p, int size) {
     if (result) {
         FATAL("m3_InvokeReallocFunc: %s", result);
     }
-    printf("alloc_call m3_InvokeReallocFunc old=%d new=%d %p\n", p, (u32)bytePtr,
-           reallocFunc->module->runtime->memory.mallocated);
+//    printf("alloc_call m3_InvokeReallocFunc old=%d new=%d %p\n", p, (u32)bytePtr,
+//           reallocFunc->module->runtime->memory.mallocated);
     return (ptr32)bytePtr;
     //return 0;
 }
@@ -207,10 +208,42 @@ bgfx_memory_t* bgfxmemory_t_from_wasm(u32 ptr, u8* _mem) {
     }
     
     bgfx_memory_s_wasm *mem_block_wasm = (bgfx_memory_s_wasm *)(ptr + _mem);
-    bgfx_memory_t *mem_block = (bgfx_memory_t *)(m3ApiOffsetToPtrNoCheck(mem_block_wasm->data) - sizeof(bgfx_memory_t));
+    bgfx_memory_t *mem_block = (bgfx_memory_t *)(m3ApiOffsetToPtr(mem_block_wasm->data) - sizeof(bgfx_memory_t));
 //    if (mem_block->size != mem_block_wasm->size) {
 //        printf("memory not match");
 //        exit(1);
 //    }
     return mem_block;
+}
+
+void wasm_to_transient_index_buffer_s(bgfx_transient_index_buffer_t* dest, bgfx_transient_index_buffer_t_wasm* source, u8* _mem) {
+    dest->size = source->size;
+    dest->handle = source->handle;
+    dest->size = source->size;
+    dest->data = m3ApiOffsetToPtr(source->data);
+}
+    
+void transient_index_buffer_s_to_wasm(bgfx_transient_index_buffer_t_wasm* dest,  bgfx_transient_index_buffer_t* source, u8* _mem) {
+    dest->size = source->size;
+    dest->handle = source->handle;
+    dest->size = source->size;
+    dest->data = m3ApiPtrToOffset(source->data);
+}
+    
+void wasm_to_transient_vertex_buffer_s(bgfx_transient_vertex_buffer_t* dest, bgfx_transient_vertex_buffer_t_wasm* source, u8* _mem) {
+    dest->startVertex = source->startVertex;
+    dest->stride = source->stride;
+    dest->handle = source->handle;
+    dest->layoutHandle = source->layoutHandle;
+    dest->size = source->size;
+    dest->data = m3ApiOffsetToPtr(source->data);
+}
+    
+void transient_vertex_buffer_s_to_wasm(bgfx_transient_vertex_buffer_t_wasm* dest,  bgfx_transient_vertex_buffer_t* source, u8* _mem) {
+    dest->startVertex = source->startVertex;
+    dest->stride = source->stride;
+    dest->handle = source->handle;
+    dest->layoutHandle = source->layoutHandle;
+    dest->size = source->size;
+    dest->data = m3ApiPtrToOffset(source->data);
 }
