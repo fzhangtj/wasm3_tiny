@@ -39,7 +39,7 @@ m3ApiRawFunction(emscripten_get_now)
         result = tp.tv_sec * 1000.0 + tp.tv_nsec / 1000000.0;
     }
 
-    printf("[tiny_log] call emscripten_get_now %lf\n", result);
+    //printf("[tiny_log] call emscripten_get_now %lf\n", result);
     m3ApiReturn(result)
 }
 
