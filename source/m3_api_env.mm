@@ -14,7 +14,7 @@
 #include "m3_exception.h"
 #include "m3_exec.h"
 #include "emscripten_fetch.h"
-
+#include "InputDelegate.h"
 
 #include <time.h>
 #include <unistd.h>
@@ -86,7 +86,7 @@ void runAnimationFrame(f64 timeStamp)
         M3Result result = m3Err_none;
         
         u64 r;
-        u64 args[2] = {timeStamp, raf.userData};
+        u64 args[2] = {(u64)timeStamp, (u64)raf.userData};
 _       (m3_CallDirect(raf.function, args, &r))
         if (r) {
             __raf = raf;
@@ -174,6 +174,7 @@ m3ApiRawFunction(js_inputInit)
 
 m3ApiRawFunction(js_inputResetStreams)
 {
+    clearTouches();
     return m3Err_none;
 }
 
@@ -189,6 +190,26 @@ m3ApiRawFunction(js_inputGetKeyStream)
     m3ApiGetArg  (i32,    arg1)
     m3ApiGetArg  (i32,    arg2)
     m3ApiReturn(0)
+}
+
+m3ApiRawFunction(js_inputGetTouchStream)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArg     (i32,  maxLen)
+    m3ApiGetArgMem  (i32*, Ptr)
+    
+    int32_t touchCount = getTouchCount();
+    int32_t* touches = getTouches();
+    
+    if (touchCount != 0) {
+        if (touchCount > maxLen) {
+            touchCount = maxLen;
+        }
+        //NSLog(@"touchCount = %d", touchCount);
+        memcpy (Ptr, touches, touchCount * sizeof(int32_t));
+    }
+    
+    m3ApiReturn(touchCount)
 }
 
 m3ApiRawFunction(js_inputGetCanvasLost)
@@ -238,7 +259,7 @@ _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputReset
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputSetMouseMode",                 "v(i)", &js_inputSetMouseMode)));
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetKeyStream",                 "i(ii)", &js_inputGetKeyStream)));
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetMouseStream",               "i(ii)", &js_inputGetKeyStream)));
-_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetTouchStream",               "i(ii)", &js_inputGetKeyStream)));
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetTouchStream",               "i(ii)", &js_inputGetTouchStream)));
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetCanvasLost",                "i()", &js_inputGetCanvasLost)));
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetFocusLost",                 "i()", &js_inputGetCanvasLost)));
 
