@@ -16,6 +16,7 @@
 #include "emscripten_fetch.h"
 #include "wasm3_lock.h"
 #include "InputDelegate.h"
+#include "AudioDelegate.h"
 
 #include <time.h>
 #include <unistd.h>
@@ -226,7 +227,7 @@ m3ApiRawFunction(js_inputGetCanvasLost)
 m3ApiRawFunction(js_html_initAudio)
 {
     m3ApiReturnType (i32)
-    //initAudio();
+    initAudio();
     m3ApiReturn(1)
 }
 
@@ -259,11 +260,11 @@ m3ApiRawFunction(js_html_audioStartLoadFile)
     m3ApiGetArg(u32, fetchptr)
     m3ApiGetArg(int32_t, audioClipIdx)
 
-    //char *audioClipName = (char *)m3ApiOffsetToPtr(fetchptr);
-    //NSString* url = [NSString stringWithUTF8String: audioClipName];
+    char *audioClipName = (char *)m3ApiOffsetToPtr(fetchptr);
+    NSString* url = [NSString stringWithUTF8String: audioClipName];
     
-    //uint32_t clipIndex = startLoad(url);
-    m3ApiReturn(1)
+    uint32_t clipIndex = startLoad(url);
+    m3ApiReturn(clipIndex)
 }
 
 m3ApiRawFunction(js_html_audioCheckLoad)
@@ -271,8 +272,8 @@ m3ApiRawFunction(js_html_audioCheckLoad)
     m3ApiReturnType (i32)
     m3ApiGetArg(int32_t, audioClipIdx)
     
-    //int status = checkLoading(audioClipIdx);
-    m3ApiReturn(0);
+    int status = checkLoading(audioClipIdx);
+    m3ApiReturn(status);
 }
 
 m3ApiRawFunction(js_html_audioFree)
@@ -289,7 +290,7 @@ m3ApiRawFunction(js_html_audioPlay)
     m3ApiGetArg(double_t, volume)
     m3ApiGetArg(int32_t, loop)
     
-    //playSource(audioClipIdx, volume, loop);
+    playSource(audioClipIdx, audioSourceIdx, volume, loop);
     
     m3ApiReturn(1)
 }
@@ -299,7 +300,13 @@ m3ApiRawFunction(js_html_audioStop)
     m3ApiReturnType (i32)
     m3ApiGetArg(int32_t, audioSourceIdx)
     m3ApiGetArg(int32_t, doStop)
-    m3ApiReturn(1)
+    
+    uint32_t isOk = 0;
+    if (doStop != 0) {
+        isOk = stopSource(audioSourceIdx) ? 1 : 0;
+    }
+    
+    m3ApiReturn(isOk)
 }
 
 m3ApiRawFunction(js_html_audioIsPlaying)
@@ -307,7 +314,9 @@ m3ApiRawFunction(js_html_audioIsPlaying)
     m3ApiReturnType (i32)
     m3ApiGetArg(int32_t, audioSourceIdx)
     
-    m3ApiReturn(1)
+    uint32_t isPlay = isPlaying(audioSourceIdx) ? 1 : 0;
+    
+    m3ApiReturn(isPlay)
 }
 
 M3Result    m3_LinkENV     (IM3Module module)
