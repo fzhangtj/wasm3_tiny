@@ -24,4 +24,6 @@ bool isPlaying(uint32_t sourceID);
 
 bool stopSource(uint32_t sourceID);
 
+void pauseAudio(bool pause);
+
 #endif /* AudioDelegate_h */

@@ -288,6 +288,14 @@ bool isPlaying(uint32_t sourceID)
            source->getStatus() == SoundSource::SoundStatus::Playing;
 }
 
+void pauseAudio(bool _audioPaused)
+{
+    if (_audioPaused != audioPaused) {
+        audioPaused = _audioPaused;
+        //printf("%s", audioPaused ? "*paused*" : "*un-paused");
+    }
+}
+
 bool stopSource(uint32_t sourceID)
 {
     if (!audioInitialized) return false;

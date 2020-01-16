@@ -244,13 +244,13 @@ m3ApiRawFunction(js_html_audioUnlock)
 
 m3ApiRawFunction(js_html_audioPause)
 {
-    //pauseAudio(true);
+    pauseAudio(true);
     return m3Err_none;
 }
 
 m3ApiRawFunction(js_html_audioResume)
 {
-    //pauseAudio(false);
+    pauseAudio(false);
     return m3Err_none;
 }
 
