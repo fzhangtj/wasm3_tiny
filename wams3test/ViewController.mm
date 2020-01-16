@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "InputDelegate.h"
 
 #include <Metal/Metal.h>
 #include "wasm3_lock.h"
@@ -148,6 +149,7 @@ extern "C"
     uint32_t frameW = (uint32_t)(self.contentScaleFactor * self.frame.size.width);
     uint32_t frameH = (uint32_t)(self.contentScaleFactor * self.frame.size.height);
     //s_ctx->m_eventQueue.postSizeEvent(s_defaultWindow, frameW, frameH);
+    InputInitWindowSize(frameW, frameH);
 }
 
 - (void)start
@@ -159,6 +161,7 @@ extern "C"
         //        [m_displayLink addToRunLoop:[NSRunLoop currentRunLoop]];
         [m_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
         //[m_displayLink setPreferredFramesPerSecond:60];
+        InputInit(self);
     }
 }
 
@@ -168,12 +171,14 @@ extern "C"
     {
         [m_displayLink invalidate];
         m_displayLink = nil;
+        InputShutdown();
     }
 }
 
 - (void)renderFrame
 {
     runAnimationFrame(0.0);
+    InputProcess();
     
    // bgfx::renderFrame();
 }
@@ -212,5 +217,24 @@ extern "C"
     [(View *)self.view  start];
 }
 
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event
+{
+    ProcessTouchEvents(self.view, touches, [event allTouches]);
+}
+
+- (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event
+{
+    ProcessTouchEvents(self.view, touches, [event allTouches]);
+}
+
+- (void)touchesCancelled:(NSSet*)touches withEvent:(UIEvent*)event
+{
+    ProcessTouchEvents(self.view, touches, [event allTouches]);
+}
+
+- (void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event
+{
+    ProcessTouchEvents(self.view, touches, [event allTouches]);
+}
 
 @end
