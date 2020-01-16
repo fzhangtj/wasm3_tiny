@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		CADEE5F823C96E96004663B9 /* libwasm3lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CADEE5F723C96E96004663B9 /* libwasm3lib.a */; };
-		CADEE60D23C97F13004663B9 /* m3_api_env.c in Sources */ = {isa = PBXBuildFile; fileRef = CADEE60C23C97F13004663B9 /* m3_api_env.c */; };
 		CADEE61023CC0EDC004663B9 /* emscripten_fetch.mm in Sources */ = {isa = PBXBuildFile; fileRef = CADEE60F23CC0EDC004663B9 /* emscripten_fetch.mm */; };
 		E6054A8123C737F5006F3FE1 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6054A8023C737F5006F3FE1 /* Metal.framework */; };
 		E6054A8523C73848006F3FE1 /* libbgfxRelease.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6054A8223C73848006F3FE1 /* libbgfxRelease.a */; };
@@ -24,6 +23,14 @@
 		E6E7A3DF23D0114B00ECB8C9 /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A3D923D0114B00ECB8C9 /* ThreadPool.cpp */; };
 		E6E7A3E223D0130400ECB8C9 /* Base64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A3E123D0130400ECB8C9 /* Base64.cpp */; };
 		E6E7A3E423D0464700ECB8C9 /* utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A3E323D0464600ECB8C9 /* utils.mm */; };
+		E6E7A41123D06C5F00ECB8C9 /* m3_api_env.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A41023D06C5F00ECB8C9 /* m3_api_env.mm */; };
+		E6E7A41423D06C8C00ECB8C9 /* InputDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A41223D06C8C00ECB8C9 /* InputDelegate.mm */; };
+		E6E7A41723D06CBE00ECB8C9 /* AudioDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A41623D06CBE00ECB8C9 /* AudioDelegate.mm */; };
+		E6E7A41F23D06D0400ECB8C9 /* stb_vorbis.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A41B23D06D0400ECB8C9 /* stb_vorbis.mm */; };
+		E6E7A42223D06D6E00ECB8C9 /* SoundSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A42023D06D6E00ECB8C9 /* SoundSource.mm */; };
+		E6E7A42323D06D6E00ECB8C9 /* SoundClip.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A42123D06D6E00ECB8C9 /* SoundClip.mm */; };
+		E6E7A42B23D0717A00ECB8C9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E7A42A23D0717A00ECB8C9 /* AVFoundation.framework */; };
+		E6E7A42D23D0718E00ECB8C9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E7A42C23D0718E00ECB8C9 /* AudioToolbox.framework */; };
 		F4F4C0CD23C48DDA0098C4DA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C0CC23C48DDA0098C4DA /* AppDelegate.m */; };
 		F4F4C0D023C48DDA0098C4DA /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C0CF23C48DDA0098C4DA /* ViewController.mm */; };
 		F4F4C0D323C48DDA0098C4DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4F4C0D123C48DDA0098C4DA /* Main.storyboard */; };
@@ -66,7 +73,6 @@
 /* Begin PBXFileReference section */
 		CADEE5F723C96E96004663B9 /* libwasm3lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwasm3lib.a; path = "../wasm3/build/Debug-iphoneos/libwasm3lib.a"; sourceTree = "<group>"; };
 		CADEE60B23C97F13004663B9 /* m3_api_env.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = m3_api_env.h; path = source/m3_api_env.h; sourceTree = SOURCE_ROOT; };
-		CADEE60C23C97F13004663B9 /* m3_api_env.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = m3_api_env.c; path = source/m3_api_env.c; sourceTree = SOURCE_ROOT; };
 		CADEE60E23CC0EDC004663B9 /* emscripten_fetch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = emscripten_fetch.h; path = source/emscripten_fetch.h; sourceTree = SOURCE_ROOT; };
 		CADEE60F23CC0EDC004663B9 /* emscripten_fetch.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = emscripten_fetch.mm; path = source/emscripten_fetch.mm; sourceTree = SOURCE_ROOT; };
 		E6054A8023C737F5006F3FE1 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
@@ -93,6 +99,22 @@
 		E6E7A3E123D0130400ECB8C9 /* Base64.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Base64.cpp; path = source/Base64.cpp; sourceTree = SOURCE_ROOT; };
 		E6E7A3E323D0464600ECB8C9 /* utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = utils.mm; path = source/utils.mm; sourceTree = SOURCE_ROOT; };
 		E6E7A3E523D0469100ECB8C9 /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = utils.h; path = source/utils.h; sourceTree = SOURCE_ROOT; };
+		E6E7A41023D06C5F00ECB8C9 /* m3_api_env.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = m3_api_env.mm; path = source/m3_api_env.mm; sourceTree = SOURCE_ROOT; };
+		E6E7A41223D06C8C00ECB8C9 /* InputDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InputDelegate.mm; sourceTree = "<group>"; };
+		E6E7A41323D06C8C00ECB8C9 /* InputDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputDelegate.h; sourceTree = "<group>"; };
+		E6E7A41523D06CBE00ECB8C9 /* AudioDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioDelegate.h; sourceTree = "<group>"; };
+		E6E7A41623D06CBE00ECB8C9 /* AudioDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioDelegate.mm; sourceTree = "<group>"; };
+		E6E7A41B23D06D0400ECB8C9 /* stb_vorbis.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = stb_vorbis.mm; path = wasm3/stb_vorbis.mm; sourceTree = SOURCE_ROOT; };
+		E6E7A42023D06D6E00ECB8C9 /* SoundSource.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundSource.mm; sourceTree = "<group>"; };
+		E6E7A42123D06D6E00ECB8C9 /* SoundClip.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundClip.mm; sourceTree = "<group>"; };
+		E6E7A42423D0716900ECB8C9 /* dr_mp3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dr_mp3.h; path = wasm3/dr_mp3.h; sourceTree = SOURCE_ROOT; };
+		E6E7A42523D0716900ECB8C9 /* miniaudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = miniaudio.h; path = wasm3/miniaudio.h; sourceTree = SOURCE_ROOT; };
+		E6E7A42623D0716900ECB8C9 /* dr_wav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dr_wav.h; path = wasm3/dr_wav.h; sourceTree = SOURCE_ROOT; };
+		E6E7A42723D0716900ECB8C9 /* dr_flac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dr_flac.h; path = wasm3/dr_flac.h; sourceTree = SOURCE_ROOT; };
+		E6E7A42823D0716900ECB8C9 /* jar_mod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jar_mod.h; path = wasm3/jar_mod.h; sourceTree = SOURCE_ROOT; };
+		E6E7A42923D0716900ECB8C9 /* jar_xm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jar_xm.h; path = wasm3/jar_xm.h; sourceTree = SOURCE_ROOT; };
+		E6E7A42A23D0717A00ECB8C9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E6E7A42C23D0718E00ECB8C9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F4F4C0C823C48DDA0098C4DA /* wams3test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wams3test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F4C0CB23C48DDA0098C4DA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F4F4C0CC23C48DDA0098C4DA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -114,6 +136,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6E7A42D23D0718E00ECB8C9 /* AudioToolbox.framework in Frameworks */,
+				E6E7A42B23D0717A00ECB8C9 /* AVFoundation.framework in Frameworks */,
 				CADEE5F823C96E96004663B9 /* libwasm3lib.a in Frameworks */,
 				E6054A8523C73848006F3FE1 /* libbgfxRelease.a in Frameworks */,
 				E6054A8623C73848006F3FE1 /* libbxRelease.a in Frameworks */,
@@ -128,6 +152,8 @@
 		E6054A7F23C737F5006F3FE1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E6E7A42C23D0718E00ECB8C9 /* AudioToolbox.framework */,
+				E6E7A42A23D0717A00ECB8C9 /* AVFoundation.framework */,
 				E6B4268923CEDCAF00DEEA19 /* wasm3.xcodeproj */,
 				E6B4269423CEDCBC00DEEA19 /* wasm3.xcodeproj */,
 				CADEE5F723C96E96004663B9 /* libwasm3lib.a */,
@@ -190,6 +216,19 @@
 		F4F4C0CA23C48DDA0098C4DA /* wams3test */ = {
 			isa = PBXGroup;
 			children = (
+				E6E7A42723D0716900ECB8C9 /* dr_flac.h */,
+				E6E7A42423D0716900ECB8C9 /* dr_mp3.h */,
+				E6E7A42623D0716900ECB8C9 /* dr_wav.h */,
+				E6E7A42823D0716900ECB8C9 /* jar_mod.h */,
+				E6E7A42923D0716900ECB8C9 /* jar_xm.h */,
+				E6E7A42523D0716900ECB8C9 /* miniaudio.h */,
+				E6E7A42123D06D6E00ECB8C9 /* SoundClip.mm */,
+				E6E7A42023D06D6E00ECB8C9 /* SoundSource.mm */,
+				E6E7A41B23D06D0400ECB8C9 /* stb_vorbis.mm */,
+				E6E7A41523D06CBE00ECB8C9 /* AudioDelegate.h */,
+				E6E7A41623D06CBE00ECB8C9 /* AudioDelegate.mm */,
+				E6E7A41323D06C8C00ECB8C9 /* InputDelegate.h */,
+				E6E7A41223D06C8C00ECB8C9 /* InputDelegate.mm */,
 				F4F4C0CB23C48DDA0098C4DA /* AppDelegate.h */,
 				F4F4C0CC23C48DDA0098C4DA /* AppDelegate.m */,
 				F4F4C0CE23C48DDA0098C4DA /* ViewController.h */,
@@ -226,6 +265,7 @@
 		F4F4C0FF23C490260098C4DA /* wasm3 */ = {
 			isa = PBXGroup;
 			children = (
+				E6E7A41023D06C5F00ECB8C9 /* m3_api_env.mm */,
 				E6E7A3E123D0130400ECB8C9 /* Base64.cpp */,
 				E6E7A3E023D0130400ECB8C9 /* Base64.h */,
 				E6E7A3D523D0114B00ECB8C9 /* Image2DHelpers.cpp */,
@@ -239,7 +279,6 @@
 				E6CC489223C88D35002BBDB9 /* m3_api_bgfx.h */,
 				E6054A8D23C857D4006F3FE1 /* m3_api_bgfx_gen.c */,
 				CADEE60B23C97F13004663B9 /* m3_api_env.h */,
-				CADEE60C23C97F13004663B9 /* m3_api_env.c */,
 				CADEE60E23CC0EDC004663B9 /* emscripten_fetch.h */,
 				CADEE60F23CC0EDC004663B9 /* emscripten_fetch.mm */,
 				E6E7A3E323D0464600ECB8C9 /* utils.mm */,
@@ -364,16 +403,21 @@
 				E6E7A3E423D0464700ECB8C9 /* utils.mm in Sources */,
 				E6E7A3C923CFF36400ECB8C9 /* wasm3_lock.c in Sources */,
 				E6E7A3DD23D0114B00ECB8C9 /* m3_api_image.c in Sources */,
+				E6E7A41423D06C8C00ECB8C9 /* InputDelegate.mm in Sources */,
+				E6E7A41123D06C5F00ECB8C9 /* m3_api_env.mm in Sources */,
 				E6E7A3DF23D0114B00ECB8C9 /* ThreadPool.cpp in Sources */,
-				CADEE60D23C97F13004663B9 /* m3_api_env.c in Sources */,
 				E6054A8E23C857D5006F3FE1 /* m3_api_bgfx_gen.c in Sources */,
 				F4F4C0D023C48DDA0098C4DA /* ViewController.mm in Sources */,
 				F4F4C0DB23C48DDB0098C4DA /* main.m in Sources */,
 				E6CC489323C88D35002BBDB9 /* m3_api_bgfx.c in Sources */,
 				E6B4268823CED2D000DEEA19 /* M3BxAllocator.cpp in Sources */,
 				E6E7A3DC23D0114B00ECB8C9 /* Image2DHelpers.cpp in Sources */,
+				E6E7A41F23D06D0400ECB8C9 /* stb_vorbis.mm in Sources */,
 				CADEE61023CC0EDC004663B9 /* emscripten_fetch.mm in Sources */,
+				E6E7A41723D06CBE00ECB8C9 /* AudioDelegate.mm in Sources */,
+				E6E7A42223D06D6E00ECB8C9 /* SoundSource.mm in Sources */,
 				F4F4C0CD23C48DDA0098C4DA /* AppDelegate.m in Sources */,
+				E6E7A42323D06D6E00ECB8C9 /* SoundClip.mm in Sources */,
 				E6E7A3E223D0130400ECB8C9 /* Base64.cpp in Sources */,
 				E6E7A3DE23D0114B00ECB8C9 /* ImageIOSTB.cpp in Sources */,
 			);
@@ -534,7 +578,7 @@
 					../bx/include,
 					../wasm3/source,
 					../bgfx/include,
-					../stb,
+					source/include,
 				);
 				INFOPLIST_FILE = wams3test/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -563,7 +607,7 @@
 					../bx/include,
 					../wasm3/source,
 					../bgfx/include,
-					../stb,
+					source/include,
 				);
 				INFOPLIST_FILE = wams3test/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
