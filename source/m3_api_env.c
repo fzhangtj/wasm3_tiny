@@ -14,7 +14,7 @@
 #include "m3_exception.h"
 #include "m3_exec.h"
 #include "emscripten_fetch.h"
-
+#include "wasm3_lock.h"
 
 #include <time.h>
 #include <unistd.h>
@@ -80,6 +80,7 @@ AnimationFrameCallback __raf;
 
 void runAnimationFrame(f64 timeStamp)
 {
+    wasm3_lock();
     if (__raf.function) {
         AnimationFrameCallback raf = __raf;
         memset(&__raf, 0, sizeof(__raf));
@@ -88,6 +89,7 @@ void runAnimationFrame(f64 timeStamp)
         
         u64 r;
         u64 args[2] = {timeStamp, raf.userData};
+      
 _       (m3_CallDirect(raf.function, args, &r))
         if (r) {
             __raf = raf;
@@ -97,6 +99,7 @@ _catch:
         if (result)
             fprintf (stderr, "error running runAnimationFrame: %s\n", result);
     }
+    wasm3_unlock();
 }
 
 m3ApiRawFunction(emscripten_request_animation_frame_loop)

@@ -9,6 +9,7 @@
 #import "ViewController.h"
 
 #include <Metal/Metal.h>
+#include "wasm3_lock.h"
 #define HAS_METAL_SDK 1
 
 #ifdef HAS_METAL_SDK
@@ -57,7 +58,9 @@ extern "C"
         result = m3_FindFunction (&func, runtime, name);
         if (result) return result;
 
+        wasm3_lock();
         result = m3_CallWithArgs (func, 0, nil);
+        wasm3_unlock();
         if (result) return result;
 
         return result;
@@ -68,6 +71,7 @@ extern "C"
     {
         M3Result result = m3Err_none;
         
+
         NSURL *fileUrl = [NSURL URLWithString:@"http://10.86.98.112:8080/MoleTiny3D.wasm"];
         static NSData *fileData = [NSData dataWithContentsOfURL:fileUrl];
         
@@ -193,7 +197,7 @@ extern "C"
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    wasm3_lock_init();
     M3Result result = m3Err_none;
     
     IM3Environment env = m3_NewEnvironment ();

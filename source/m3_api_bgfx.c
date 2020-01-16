@@ -82,6 +82,45 @@ ptr32 m3_InvokeReallocFunc(ptr32 p, int size) {
     return (ptr32)bytePtr;
     //return 0;
 }
+    
+void transient_index_buffer_t_to_wasm(bgfx_transient_index_buffer_t_wasm* dest,  bgfx_transient_index_buffer_t* source, u8* _mem) {
+    dest->size = source->size;
+    dest->handle = source->handle;
+    dest->startIndex = source->startIndex;
+    if (source->data == 0) {
+        dest->data = 0;
+    } else {
+        dest->data = m3ApiPtrToOffset(source->data);
+    }
+    
+}
+
+void wasm_to_transient_vertex_buffer_t(bgfx_transient_vertex_buffer_t* dest, bgfx_transient_vertex_buffer_t_wasm* source, u8* _mem) {
+    dest->startVertex = source->startVertex;
+    dest->stride = source->stride;
+    dest->handle = source->handle;
+    dest->layoutHandle = source->layoutHandle;
+    dest->size = source->size;
+    if (source->data == 0) {
+        dest->data = 0;
+    } else {
+        dest->data = m3ApiOffsetToPtr(source->data);
+    }
+}
+
+void transient_vertex_buffer_t_to_wasm(bgfx_transient_vertex_buffer_t_wasm* dest,  bgfx_transient_vertex_buffer_t* source, u8* _mem) {
+    dest->startVertex = source->startVertex;
+    dest->stride = source->stride;
+    dest->handle = source->handle;
+    dest->layoutHandle = source->layoutHandle;
+    dest->size = source->size;
+    if (source->data == 0) {
+        dest->data = 0;
+    } else {
+        dest->data = m3ApiPtrToOffset(source->data);
+    }
+}
+
 
 //void* m3_internal_bgfx_get_caps() {
 //    const bgfx_caps_t* ret = bgfx_get_caps();
@@ -158,7 +197,6 @@ m3ApiRawFunction(m3_bgfx_get_caps)
     return m3Err_none;
 }
     
-   
     static
     M3Result SuppressLookupFailure(M3Result i_result)
     {
@@ -173,15 +211,14 @@ m3ApiRawFunction(m3_bgfx_get_caps)
     {
         M3Result result = m3Err_none;
         whandle = handle;
-        (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_get_caps", "*()", &m3_bgfx_get_caps)));
+_        (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_get_caps", "*()", &m3_bgfx_get_caps)));
         
-       (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_init", "i(*)", &m3_bgfx_init)));
+_       (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_init", "i(*)", &m3_bgfx_init)));
         
-        (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_copy", "*(*i)", &m3_bgfx_copy)));
+_        (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_copy", "*(*i)", &m3_bgfx_copy)));
         
         _        (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_dbg_text_printf", "v(iiiii)", &m3_bgfx_dbg_text_printf)));
         m3_LinkBGFX_Gen  (module, handle);
-
         InitAllocator(module->runtime);
 
     _catch:
@@ -216,34 +253,15 @@ bgfx_memory_t* bgfxmemory_t_from_wasm(u32 ptr, u8* _mem) {
     return mem_block;
 }
 
-void wasm_to_transient_index_buffer_s(bgfx_transient_index_buffer_t* dest, bgfx_transient_index_buffer_t_wasm* source, u8* _mem) {
+void wasm_to_transient_index_buffer_t(bgfx_transient_index_buffer_t* dest, bgfx_transient_index_buffer_t_wasm* source, u8* _mem) {
     dest->size = source->size;
     dest->handle = source->handle;
-    dest->size = source->size;
-    dest->data = m3ApiOffsetToPtr(source->data);
+    dest->startIndex = source->startIndex;
+    if (source->data == 0) {
+        dest->data = 0;
+    } else {
+        dest->data = m3ApiOffsetToPtr(source->data);
+    }
+    
 }
     
-void transient_index_buffer_s_to_wasm(bgfx_transient_index_buffer_t_wasm* dest,  bgfx_transient_index_buffer_t* source, u8* _mem) {
-    dest->size = source->size;
-    dest->handle = source->handle;
-    dest->size = source->size;
-    dest->data = m3ApiPtrToOffset(source->data);
-}
-    
-void wasm_to_transient_vertex_buffer_s(bgfx_transient_vertex_buffer_t* dest, bgfx_transient_vertex_buffer_t_wasm* source, u8* _mem) {
-    dest->startVertex = source->startVertex;
-    dest->stride = source->stride;
-    dest->handle = source->handle;
-    dest->layoutHandle = source->layoutHandle;
-    dest->size = source->size;
-    dest->data = m3ApiOffsetToPtr(source->data);
-}
-    
-void transient_vertex_buffer_s_to_wasm(bgfx_transient_vertex_buffer_t_wasm* dest,  bgfx_transient_vertex_buffer_t* source, u8* _mem) {
-    dest->startVertex = source->startVertex;
-    dest->stride = source->stride;
-    dest->handle = source->handle;
-    dest->layoutHandle = source->layoutHandle;
-    dest->size = source->size;
-    dest->data = m3ApiPtrToOffset(source->data);
-}

@@ -18,7 +18,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	bgfx_vertex_layout_t* ret = bgfx_vertex_layout_begin(_bgfx_this, _bgfx__rendererType);
 	BGFX_CALL_TRACE("vertex_layout_begin");
 	m3ApiReturn(m3ApiPtrToOffset(ret))
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_vertex_layout_add)
@@ -33,7 +32,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	bgfx_vertex_layout_t* ret = bgfx_vertex_layout_add(_bgfx_this, _bgfx__attrib, _bgfx__num, _bgfx__type, _bgfx__normalized, _bgfx__asInt);
 	BGFX_CALL_TRACE("vertex_layout_add");
 	m3ApiReturn(m3ApiPtrToOffset(ret))
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_vertex_layout_end)
@@ -51,7 +49,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	const char* ret = bgfx_get_renderer_name(_bgfx__type);
 	BGFX_CALL_TRACE("get_renderer_name");
 	m3ApiReturn(m3ApiPtrToOffset(ret))
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_reset)
@@ -72,7 +69,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	uint32_t ret = bgfx_frame(_bgfx__capture);
 	BGFX_CALL_TRACE("frame");
 	m3ApiReturn(ret)
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_get_renderer_type)
@@ -81,7 +77,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	bgfx_renderer_type_t ret = bgfx_get_renderer_type();
 	BGFX_CALL_TRACE("get_renderer_type");
 	m3ApiReturn(ret)
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_set_debug)
@@ -109,7 +104,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	bgfx_index_buffer_handle_t ret = bgfx_create_index_buffer(_bgfx__mem, _bgfx__flags);
 	BGFX_CALL_TRACE("create_index_buffer");
 	m3ApiReturn(bgfx_handle_to_idx(ret))
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_create_vertex_layout)
@@ -119,7 +113,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	bgfx_vertex_layout_handle_t ret = bgfx_create_vertex_layout(_bgfx__layout);
 	BGFX_CALL_TRACE("create_vertex_layout");
 	m3ApiReturn(bgfx_handle_to_idx(ret))
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_create_vertex_buffer)
@@ -131,7 +124,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	bgfx_vertex_buffer_handle_t ret = bgfx_create_vertex_buffer(_bgfx__mem, _bgfx__layout, _bgfx__flags);
 	BGFX_CALL_TRACE("create_vertex_buffer");
 	m3ApiReturn(bgfx_handle_to_idx(ret))
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_get_avail_transient_index_buffer)
@@ -141,7 +133,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	uint32_t ret = bgfx_get_avail_transient_index_buffer(_bgfx__num);
 	BGFX_CALL_TRACE("get_avail_transient_index_buffer");
 	m3ApiReturn(ret)
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_get_avail_transient_vertex_buffer)
@@ -152,24 +143,25 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	uint32_t ret = bgfx_get_avail_transient_vertex_buffer(_bgfx__num, _bgfx__layout);
 	BGFX_CALL_TRACE("get_avail_transient_vertex_buffer");
 	m3ApiReturn(ret)
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_alloc_transient_index_buffer)
 	{
-		m3ApiGetArgMem   (bgfx_transient_index_buffer_t*       , _bgfx__tib)
+		m3BgfxApiTransientIndexBufferArg(_bgfx__tib)
 		m3ApiGetArg   (uint32_t       , _bgfx__num)
 	bgfx_alloc_transient_index_buffer(_bgfx__tib, _bgfx__num);
+	transient_index_buffer_t_to_wasm(_wasm__bgfx__tib, _bgfx__tib, _mem);
 	BGFX_CALL_TRACE("alloc_transient_index_buffer");
 	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_alloc_transient_vertex_buffer)
 	{
-		m3ApiGetArgMem   (bgfx_transient_vertex_buffer_t*       , _bgfx__tvb)
+		m3BgfxApiTransientVertexBufferArg(_bgfx__tvb)
 		m3ApiGetArg   (uint32_t       , _bgfx__num)
 		m3ApiGetArgMem   (const bgfx_vertex_layout_t *       , _bgfx__layout)
 	bgfx_alloc_transient_vertex_buffer(_bgfx__tvb, _bgfx__num, _bgfx__layout);
+	transient_vertex_buffer_t_to_wasm(_wasm__bgfx__tvb, _bgfx__tvb, _mem);
 	BGFX_CALL_TRACE("alloc_transient_vertex_buffer");
 	return m3Err_none;
 	}
@@ -177,15 +169,16 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	m3ApiRawFunction(m3_bgfx_alloc_transient_buffers)
 	{
 	m3ApiReturnType(int32_t)
-		m3ApiGetArgMem   (bgfx_transient_vertex_buffer_t*       , _bgfx__tvb)
+		m3BgfxApiTransientVertexBufferArg(_bgfx__tvb)
 		m3ApiGetArgMem   (const bgfx_vertex_layout_t *       , _bgfx__layout)
 		m3ApiGetArg   (uint32_t       , _bgfx__numVertices)
-		m3ApiGetArgMem   (bgfx_transient_index_buffer_t*       , _bgfx__tib)
+		m3BgfxApiTransientIndexBufferArg(_bgfx__tib)
 		m3ApiGetArg   (uint32_t       , _bgfx__numIndices)
 	bool ret = bgfx_alloc_transient_buffers(_bgfx__tvb, _bgfx__layout, _bgfx__numVertices, _bgfx__tib, _bgfx__numIndices);
+	transient_index_buffer_t_to_wasm(_wasm__bgfx__tib, _bgfx__tib, _mem);
+	transient_vertex_buffer_t_to_wasm(_wasm__bgfx__tvb, _bgfx__tvb, _mem);
 	BGFX_CALL_TRACE("alloc_transient_buffers");
 	m3ApiReturn(ret)
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_create_shader)
@@ -195,7 +188,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	bgfx_shader_handle_t ret = bgfx_create_shader(_bgfx__mem);
 	BGFX_CALL_TRACE("create_shader");
 	m3ApiReturn(bgfx_handle_to_idx(ret))
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_set_shader_name)
@@ -217,7 +209,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	bgfx_program_handle_t ret = bgfx_create_program(_bgfx__vsh, _bgfx__fsh, _bgfx__destroyShaders);
 	BGFX_CALL_TRACE("create_program");
 	m3ApiReturn(bgfx_handle_to_idx(ret))
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_create_texture_2d)
@@ -233,7 +224,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	bgfx_texture_handle_t ret = bgfx_create_texture_2d(_bgfx__width, _bgfx__height, _bgfx__hasMips, _bgfx__numLayers, _bgfx__format, _bgfx__flags, _bgfx__mem);
 	BGFX_CALL_TRACE("create_texture_2d");
 	m3ApiReturn(bgfx_handle_to_idx(ret))
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_destroy_texture)
@@ -253,7 +243,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	bgfx_frame_buffer_handle_t ret = bgfx_create_frame_buffer_from_attachment(_bgfx__num, _bgfx__attachment, _bgfx__destroyTexture);
 	BGFX_CALL_TRACE("create_frame_buffer_from_attachment");
 	m3ApiReturn(bgfx_handle_to_idx(ret))
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_create_uniform)
@@ -265,7 +254,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	bgfx_uniform_handle_t ret = bgfx_create_uniform(_bgfx__name, _bgfx__type, _bgfx__num);
 	BGFX_CALL_TRACE("create_uniform");
 	m3ApiReturn(bgfx_handle_to_idx(ret))
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_set_view_rect)
@@ -339,7 +327,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	bgfx_encoder_t* ret = bgfx_encoder_begin(_bgfx__forThread);
 	BGFX_CALL_TRACE("encoder_begin");
 	m3ApiReturn(m3ApiPtrToOffset(ret))
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_encoder_end)
@@ -369,7 +356,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	uint32_t ret = bgfx_encoder_set_transform(_bgfx_this, _bgfx__mtx, _bgfx__num);
 	BGFX_CALL_TRACE("encoder_set_transform");
 	m3ApiReturn(ret)
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_encoder_set_uniform)
@@ -397,7 +383,7 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	m3ApiRawFunction(m3_bgfx_encoder_set_transient_index_buffer)
 	{
 		m3ApiGetArgMem   (bgfx_encoder_t*       , _bgfx_this)
-		m3ApiGetArgMem   (const bgfx_transient_index_buffer_t*       , _bgfx__tib)
+		m3BgfxApiTransientIndexBufferArg(_bgfx__tib)
 		m3ApiGetArg   (uint32_t       , _bgfx__firstIndex)
 		m3ApiGetArg   (uint32_t       , _bgfx__numIndices)
 	bgfx_encoder_set_transient_index_buffer(_bgfx_this, _bgfx__tib, _bgfx__firstIndex, _bgfx__numIndices);
@@ -422,7 +408,7 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	{
 		m3ApiGetArgMem   (bgfx_encoder_t*       , _bgfx_this)
 		m3ApiGetArg   (uint8_t       , _bgfx__stream)
-		m3ApiGetArgMem   (const bgfx_transient_vertex_buffer_t*       , _bgfx__tvb)
+		m3BgfxApiTransientVertexBufferArg(_bgfx__tvb)
 		m3ApiGetArg   (uint32_t       , _bgfx__startVertex)
 		m3ApiGetArg   (uint32_t       , _bgfx__numVertices)
 		m3ApiGetArg   (bgfx_vertex_layout_handle_t       , _bgfx__layoutHandle)
@@ -489,7 +475,6 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	uint32_t ret = bgfx_set_transform(_bgfx__mtx, _bgfx__num);
 	BGFX_CALL_TRACE("set_transform");
 	m3ApiReturn(ret)
-	return m3Err_none;
 	}
 	
 	m3ApiRawFunction(m3_bgfx_set_uniform)
@@ -514,7 +499,7 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	
 	m3ApiRawFunction(m3_bgfx_set_transient_index_buffer)
 	{
-		m3ApiGetArgMem   (const bgfx_transient_index_buffer_t*       , _bgfx__tib)
+		m3BgfxApiTransientIndexBufferArg(_bgfx__tib)
 		m3ApiGetArg   (uint32_t       , _bgfx__firstIndex)
 		m3ApiGetArg   (uint32_t       , _bgfx__numIndices)
 	bgfx_set_transient_index_buffer(_bgfx__tib, _bgfx__firstIndex, _bgfx__numIndices);
@@ -536,7 +521,7 @@ m3ApiRawFunction(m3_bgfx_vertex_layout_begin)
 	m3ApiRawFunction(m3_bgfx_set_transient_vertex_buffer)
 	{
 		m3ApiGetArg   (uint8_t       , _bgfx__stream)
-		m3ApiGetArgMem   (const bgfx_transient_vertex_buffer_t*       , _bgfx__tvb)
+		m3BgfxApiTransientVertexBufferArg(_bgfx__tvb)
 		m3ApiGetArg   (uint32_t       , _bgfx__startVertex)
 		m3ApiGetArg   (uint32_t       , _bgfx__numVertices)
 	bgfx_set_transient_vertex_buffer(_bgfx__stream, _bgfx__tvb, _bgfx__startVertex, _bgfx__numVertices);
@@ -589,111 +574,111 @@ M3Result  m3_LinkBGFX_Gen  (IM3Module module, void* handle)
     M3Result result = m3Err_none;
     whandle = handle;
 
-   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_vertex_layout_begin", "*(*i)", &m3_bgfx_vertex_layout_begin)));
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_vertex_layout_begin", "*(*i)", &m3_bgfx_vertex_layout_begin)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_vertex_layout_add", "*(*iiiii)", &m3_bgfx_vertex_layout_add)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_vertex_layout_add", "*(*iiiii)", &m3_bgfx_vertex_layout_add)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_vertex_layout_end", "v(*)", &m3_bgfx_vertex_layout_end)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_vertex_layout_end", "v(*)", &m3_bgfx_vertex_layout_end)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_get_renderer_name", "*(i)", &m3_bgfx_get_renderer_name)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_get_renderer_name", "*(i)", &m3_bgfx_get_renderer_name)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_reset", "v(iiii)", &m3_bgfx_reset)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_reset", "v(iiii)", &m3_bgfx_reset)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_frame", "i(i)", &m3_bgfx_frame)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_frame", "i(i)", &m3_bgfx_frame)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_get_renderer_type", "i()", &m3_bgfx_get_renderer_type)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_get_renderer_type", "i()", &m3_bgfx_get_renderer_type)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_debug", "v(i)", &m3_bgfx_set_debug)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_debug", "v(i)", &m3_bgfx_set_debug)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_dbg_text_clear", "v(ii)", &m3_bgfx_dbg_text_clear)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_dbg_text_clear", "v(ii)", &m3_bgfx_dbg_text_clear)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_index_buffer", "*(*i)", &m3_bgfx_create_index_buffer)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_index_buffer", "*(*i)", &m3_bgfx_create_index_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_vertex_layout", "*(*)", &m3_bgfx_create_vertex_layout)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_vertex_layout", "*(*)", &m3_bgfx_create_vertex_layout)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_vertex_buffer", "*(**i)", &m3_bgfx_create_vertex_buffer)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_vertex_buffer", "*(**i)", &m3_bgfx_create_vertex_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_get_avail_transient_index_buffer", "i(i)", &m3_bgfx_get_avail_transient_index_buffer)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_get_avail_transient_index_buffer", "i(i)", &m3_bgfx_get_avail_transient_index_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_get_avail_transient_vertex_buffer", "i(i*)", &m3_bgfx_get_avail_transient_vertex_buffer)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_get_avail_transient_vertex_buffer", "i(i*)", &m3_bgfx_get_avail_transient_vertex_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_alloc_transient_index_buffer", "v(*i)", &m3_bgfx_alloc_transient_index_buffer)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_alloc_transient_index_buffer", "v(*i)", &m3_bgfx_alloc_transient_index_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_alloc_transient_vertex_buffer", "v(*i*)", &m3_bgfx_alloc_transient_vertex_buffer)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_alloc_transient_vertex_buffer", "v(*i*)", &m3_bgfx_alloc_transient_vertex_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_alloc_transient_buffers", "i(**i*i)", &m3_bgfx_alloc_transient_buffers)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_alloc_transient_buffers", "i(**i*i)", &m3_bgfx_alloc_transient_buffers)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_shader", "*(*)", &m3_bgfx_create_shader)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_shader", "*(*)", &m3_bgfx_create_shader)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_shader_name", "v(**i)", &m3_bgfx_set_shader_name)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_shader_name", "v(**i)", &m3_bgfx_set_shader_name)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_program", "*(**i)", &m3_bgfx_create_program)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_program", "*(**i)", &m3_bgfx_create_program)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_texture_2d", "*(iiiiiI*)", &m3_bgfx_create_texture_2d)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_texture_2d", "*(iiiiiI*)", &m3_bgfx_create_texture_2d)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_destroy_texture", "v(*)", &m3_bgfx_destroy_texture)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_destroy_texture", "v(*)", &m3_bgfx_destroy_texture)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_frame_buffer_from_attachment", "*(i*i)", &m3_bgfx_create_frame_buffer_from_attachment)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_frame_buffer_from_attachment", "*(i*i)", &m3_bgfx_create_frame_buffer_from_attachment)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_uniform", "*(*ii)", &m3_bgfx_create_uniform)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_create_uniform", "*(*ii)", &m3_bgfx_create_uniform)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_view_rect", "v(iiiii)", &m3_bgfx_set_view_rect)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_view_rect", "v(iiiii)", &m3_bgfx_set_view_rect)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_view_scissor", "v(iiiii)", &m3_bgfx_set_view_scissor)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_view_scissor", "v(iiiii)", &m3_bgfx_set_view_scissor)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_view_clear", "v(iiifi)", &m3_bgfx_set_view_clear)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_view_clear", "v(iiifi)", &m3_bgfx_set_view_clear)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_view_mode", "v(ii)", &m3_bgfx_set_view_mode)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_view_mode", "v(ii)", &m3_bgfx_set_view_mode)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_view_frame_buffer", "v(i*)", &m3_bgfx_set_view_frame_buffer)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_view_frame_buffer", "v(i*)", &m3_bgfx_set_view_frame_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_view_transform", "v(i**)", &m3_bgfx_set_view_transform)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_view_transform", "v(i**)", &m3_bgfx_set_view_transform)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_begin", "*(i)", &m3_bgfx_encoder_begin)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_begin", "*(i)", &m3_bgfx_encoder_begin)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_end", "v(*)", &m3_bgfx_encoder_end)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_end", "v(*)", &m3_bgfx_encoder_end)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_state", "v(*Ii)", &m3_bgfx_encoder_set_state)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_state", "v(*Ii)", &m3_bgfx_encoder_set_state)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_transform", "i(**i)", &m3_bgfx_encoder_set_transform)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_transform", "i(**i)", &m3_bgfx_encoder_set_transform)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_uniform", "v(***i)", &m3_bgfx_encoder_set_uniform)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_uniform", "v(***i)", &m3_bgfx_encoder_set_uniform)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_index_buffer", "v(**ii)", &m3_bgfx_encoder_set_index_buffer)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_index_buffer", "v(**ii)", &m3_bgfx_encoder_set_index_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_transient_index_buffer", "v(**ii)", &m3_bgfx_encoder_set_transient_index_buffer)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_transient_index_buffer", "v(**ii)", &m3_bgfx_encoder_set_transient_index_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_vertex_buffer", "v(*i*ii*)", &m3_bgfx_encoder_set_vertex_buffer)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_vertex_buffer", "v(*i*ii*)", &m3_bgfx_encoder_set_vertex_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_transient_vertex_buffer", "v(*i*ii*)", &m3_bgfx_encoder_set_transient_vertex_buffer)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_transient_vertex_buffer", "v(*i*ii*)", &m3_bgfx_encoder_set_transient_vertex_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_texture", "v(*i**i)", &m3_bgfx_encoder_set_texture)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_set_texture", "v(*i**i)", &m3_bgfx_encoder_set_texture)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_submit", "v(*i*ii)", &m3_bgfx_encoder_submit)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_encoder_submit", "v(*i*ii)", &m3_bgfx_encoder_submit)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_request_screen_shot", "v(**)", &m3_bgfx_request_screen_shot)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_request_screen_shot", "v(**)", &m3_bgfx_request_screen_shot)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_platform_data", "v(*)", &m3_bgfx_set_platform_data)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_platform_data", "v(*)", &m3_bgfx_set_platform_data)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_state", "v(Ii)", &m3_bgfx_set_state)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_state", "v(Ii)", &m3_bgfx_set_state)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_transform", "i(*i)", &m3_bgfx_set_transform)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_transform", "i(*i)", &m3_bgfx_set_transform)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_uniform", "v(**i)", &m3_bgfx_set_uniform)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_uniform", "v(**i)", &m3_bgfx_set_uniform)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_index_buffer", "v(*ii)", &m3_bgfx_set_index_buffer)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_index_buffer", "v(*ii)", &m3_bgfx_set_index_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_transient_index_buffer", "v(*ii)", &m3_bgfx_set_transient_index_buffer)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_transient_index_buffer", "v(*ii)", &m3_bgfx_set_transient_index_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_vertex_buffer", "v(i*ii)", &m3_bgfx_set_vertex_buffer)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_vertex_buffer", "v(i*ii)", &m3_bgfx_set_vertex_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_transient_vertex_buffer", "v(i*ii)", &m3_bgfx_set_transient_vertex_buffer)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_transient_vertex_buffer", "v(i*ii)", &m3_bgfx_set_transient_vertex_buffer)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_texture", "v(i**i)", &m3_bgfx_set_texture)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_set_texture", "v(i**i)", &m3_bgfx_set_texture)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_touch", "v(i)", &m3_bgfx_touch)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_touch", "v(i)", &m3_bgfx_touch)));
 	
-	   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_submit", "v(i*ii)", &m3_bgfx_submit)));
+	_   (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_submit", "v(i*ii)", &m3_bgfx_submit)));
 	
 
 _catch:

@@ -17,6 +17,7 @@
 		E6054A8E23C857D5006F3FE1 /* m3_api_bgfx_gen.c in Sources */ = {isa = PBXBuildFile; fileRef = E6054A8D23C857D4006F3FE1 /* m3_api_bgfx_gen.c */; };
 		E6B4268823CED2D000DEEA19 /* M3BxAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6B4268723CED2D000DEEA19 /* M3BxAllocator.cpp */; };
 		E6CC489323C88D35002BBDB9 /* m3_api_bgfx.c in Sources */ = {isa = PBXBuildFile; fileRef = E6CC489123C88D35002BBDB9 /* m3_api_bgfx.c */; };
+		E6E7A3C923CFF36400ECB8C9 /* wasm3_lock.c in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A3C723CFF36400ECB8C9 /* wasm3_lock.c */; };
 		F4F4C0CD23C48DDA0098C4DA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C0CC23C48DDA0098C4DA /* AppDelegate.m */; };
 		F4F4C0D023C48DDA0098C4DA /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C0CF23C48DDA0098C4DA /* ViewController.mm */; };
 		F4F4C0D323C48DDA0098C4DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4F4C0D123C48DDA0098C4DA /* Main.storyboard */; };
@@ -24,6 +25,37 @@
 		F4F4C0D823C48DDB0098C4DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4F4C0D623C48DDB0098C4DA /* LaunchScreen.storyboard */; };
 		F4F4C0DB23C48DDB0098C4DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C0DA23C48DDB0098C4DA /* main.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E6B4269023CEDCAF00DEEA19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6B4268923CEDCAF00DEEA19 /* wasm3.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0098BA76D329441C95B701E3;
+			remoteInfo = wasm3;
+		};
+		E6B4269223CEDCAF00DEEA19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6B4268923CEDCAF00DEEA19 /* wasm3.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9DBE743C73B1430DA432BE96;
+			remoteInfo = wasm3lib;
+		};
+		E6B4269B23CEDCBC00DEEA19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6B4269423CEDCBC00DEEA19 /* wasm3.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0098BA76D329441C95B701E3;
+			remoteInfo = wasm3;
+		};
+		E6B4269D23CEDCBC00DEEA19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6B4269423CEDCBC00DEEA19 /* wasm3.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9DBE743C73B1430DA432BE96;
+			remoteInfo = wasm3lib;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		CADEE5F723C96E96004663B9 /* libwasm3lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwasm3lib.a; path = "../wasm3/build/Debug-iphoneos/libwasm3lib.a"; sourceTree = "<group>"; };
@@ -38,8 +70,12 @@
 		E6054A8D23C857D4006F3FE1 /* m3_api_bgfx_gen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_api_bgfx_gen.c; path = source/m3_api_bgfx_gen.c; sourceTree = SOURCE_ROOT; };
 		E6B4268623CED2D000DEEA19 /* M3BxAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M3BxAllocator.h; sourceTree = "<group>"; };
 		E6B4268723CED2D000DEEA19 /* M3BxAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = M3BxAllocator.cpp; sourceTree = "<group>"; };
+		E6B4268923CEDCAF00DEEA19 /* wasm3.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = wasm3.xcodeproj; path = ../wasm3/build/wasm3.xcodeproj; sourceTree = "<group>"; };
+		E6B4269423CEDCBC00DEEA19 /* wasm3.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = wasm3.xcodeproj; path = ../wasm3/build/wasm3.xcodeproj; sourceTree = "<group>"; };
 		E6CC489123C88D35002BBDB9 /* m3_api_bgfx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_api_bgfx.c; path = source/m3_api_bgfx.c; sourceTree = SOURCE_ROOT; };
 		E6CC489223C88D35002BBDB9 /* m3_api_bgfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_api_bgfx.h; path = source/m3_api_bgfx.h; sourceTree = SOURCE_ROOT; };
+		E6E7A3C723CFF36400ECB8C9 /* wasm3_lock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wasm3_lock.c; sourceTree = "<group>"; };
+		E6E7A3C823CFF36400ECB8C9 /* wasm3_lock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wasm3_lock.h; sourceTree = "<group>"; };
 		F4F4C0C823C48DDA0098C4DA /* wams3test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wams3test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F4C0CB23C48DDA0098C4DA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F4F4C0CC23C48DDA0098C4DA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -75,6 +111,8 @@
 		E6054A7F23C737F5006F3FE1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E6B4268923CEDCAF00DEEA19 /* wasm3.xcodeproj */,
+				E6B4269423CEDCBC00DEEA19 /* wasm3.xcodeproj */,
 				CADEE5F723C96E96004663B9 /* libwasm3lib.a */,
 				E6054A8223C73848006F3FE1 /* libbgfxRelease.a */,
 				E6054A8423C73848006F3FE1 /* libbimgRelease.a */,
@@ -82,6 +120,24 @@
 				E6054A8023C737F5006F3FE1 /* Metal.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E6B4268A23CEDCAF00DEEA19 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E6B4269123CEDCAF00DEEA19 /* wasm3 */,
+				E6B4269323CEDCAF00DEEA19 /* libwasm3lib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E6B4269523CEDCBC00DEEA19 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E6B4269C23CEDCBC00DEEA19 /* wasm3 */,
+				E6B4269E23CEDCBC00DEEA19 /* libwasm3lib.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		E6FC6F6A23C58E41003255FA /* data */ = {
@@ -126,6 +182,8 @@
 				F4F4C0D623C48DDB0098C4DA /* LaunchScreen.storyboard */,
 				F4F4C0D923C48DDB0098C4DA /* Info.plist */,
 				F4F4C0DA23C48DDB0098C4DA /* main.m */,
+				E6E7A3C723CFF36400ECB8C9 /* wasm3_lock.c */,
+				E6E7A3C823CFF36400ECB8C9 /* wasm3_lock.h */,
 			);
 			path = wams3test;
 			sourceTree = "<group>";
@@ -207,12 +265,55 @@
 			mainGroup = F4F4C0BF23C48DDA0098C4DA;
 			productRefGroup = F4F4C0C923C48DDA0098C4DA /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E6B4268A23CEDCAF00DEEA19 /* Products */;
+					ProjectRef = E6B4268923CEDCAF00DEEA19 /* wasm3.xcodeproj */;
+				},
+				{
+					ProductGroup = E6B4269523CEDCBC00DEEA19 /* Products */;
+					ProjectRef = E6B4269423CEDCBC00DEEA19 /* wasm3.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				F4F4C0C723C48DDA0098C4DA /* wams3test */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		E6B4269123CEDCAF00DEEA19 /* wasm3 */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			name = wasm3;
+			path = wasm3.app;
+			remoteRef = E6B4269023CEDCAF00DEEA19 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E6B4269323CEDCAF00DEEA19 /* libwasm3lib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwasm3lib.a;
+			remoteRef = E6B4269223CEDCAF00DEEA19 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E6B4269C23CEDCBC00DEEA19 /* wasm3 */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			name = wasm3;
+			path = wasm3.app;
+			remoteRef = E6B4269B23CEDCBC00DEEA19 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E6B4269E23CEDCBC00DEEA19 /* libwasm3lib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwasm3lib.a;
+			remoteRef = E6B4269D23CEDCBC00DEEA19 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F4F4C0C623C48DDA0098C4DA /* Resources */ = {
@@ -232,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6E7A3C923CFF36400ECB8C9 /* wasm3_lock.c in Sources */,
 				CADEE60D23C97F13004663B9 /* m3_api_env.c in Sources */,
 				E6054A8E23C857D5006F3FE1 /* m3_api_bgfx_gen.c in Sources */,
 				F4F4C0D023C48DDA0098C4DA /* ViewController.mm in Sources */,

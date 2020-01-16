@@ -13,6 +13,7 @@
 #include "m3_env.h"
 #include "m3_exception.h"
 #include "m3_api_bgfx.h"
+#include "wasm3_lock.h"
 #include <bgfx/c99/bgfx.h>
 #ifndef BX_CONFIG_ALLOCATOR_NATURAL_ALIGNMENT
 #    define BX_CONFIG_ALLOCATOR_NATURAL_ALIGNMENT 8
@@ -62,7 +63,9 @@ void* m3_bgfx_allocator(bgfx_allocator_interface_t* _this, void* _ptr, size_t _s
             if (BX_CONFIG_ALLOCATOR_NATURAL_ALIGNMENT >= _align)
             {
                 u32 offset = m3ApiPtrToOffset(_ptr);
+                wasm3_lock();
                 m3_InvokeFreeFunc(offset);
+                wasm3_unlock();
                 //::free(_ptr);
                 return NULL;
             }
@@ -82,7 +85,9 @@ void* m3_bgfx_allocator(bgfx_allocator_interface_t* _this, void* _ptr, size_t _s
         if (BX_CONFIG_ALLOCATOR_NATURAL_ALIGNMENT >= _align)
         {
             // return ::malloc(_size);
+            wasm3_lock();
             ptr32 offset = m3_InvokeMallocFunc(_size);
+             wasm3_unlock();
             return m3ApiOffsetToPtr(offset);
         }
         
@@ -97,7 +102,9 @@ void* m3_bgfx_allocator(bgfx_allocator_interface_t* _this, void* _ptr, size_t _s
     if (BX_CONFIG_ALLOCATOR_NATURAL_ALIGNMENT >= _align)
     {
         u32 offset = m3ApiPtrToOffset(_ptr);
+        wasm3_lock();
         ptr32 result = m3_InvokeReallocFunc(offset, _size);
+        wasm3_unlock();
         return m3ApiOffsetToPtr(result);
         // return ::realloc(_ptr, _size);
     }
