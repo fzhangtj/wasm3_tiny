@@ -18,6 +18,12 @@
 		E6B4268823CED2D000DEEA19 /* M3BxAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6B4268723CED2D000DEEA19 /* M3BxAllocator.cpp */; };
 		E6CC489323C88D35002BBDB9 /* m3_api_bgfx.c in Sources */ = {isa = PBXBuildFile; fileRef = E6CC489123C88D35002BBDB9 /* m3_api_bgfx.c */; };
 		E6E7A3C923CFF36400ECB8C9 /* wasm3_lock.c in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A3C723CFF36400ECB8C9 /* wasm3_lock.c */; };
+		E6E7A3DC23D0114B00ECB8C9 /* Image2DHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A3D523D0114B00ECB8C9 /* Image2DHelpers.cpp */; };
+		E6E7A3DD23D0114B00ECB8C9 /* m3_api_image.c in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A3D623D0114B00ECB8C9 /* m3_api_image.c */; };
+		E6E7A3DE23D0114B00ECB8C9 /* ImageIOSTB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A3D823D0114B00ECB8C9 /* ImageIOSTB.cpp */; };
+		E6E7A3DF23D0114B00ECB8C9 /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A3D923D0114B00ECB8C9 /* ThreadPool.cpp */; };
+		E6E7A3E223D0130400ECB8C9 /* Base64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A3E123D0130400ECB8C9 /* Base64.cpp */; };
+		E6E7A3E423D0464700ECB8C9 /* utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = E6E7A3E323D0464600ECB8C9 /* utils.mm */; };
 		F4F4C0CD23C48DDA0098C4DA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C0CC23C48DDA0098C4DA /* AppDelegate.m */; };
 		F4F4C0D023C48DDA0098C4DA /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4F4C0CF23C48DDA0098C4DA /* ViewController.mm */; };
 		F4F4C0D323C48DDA0098C4DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4F4C0D123C48DDA0098C4DA /* Main.storyboard */; };
@@ -76,6 +82,17 @@
 		E6CC489223C88D35002BBDB9 /* m3_api_bgfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_api_bgfx.h; path = source/m3_api_bgfx.h; sourceTree = SOURCE_ROOT; };
 		E6E7A3C723CFF36400ECB8C9 /* wasm3_lock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wasm3_lock.c; sourceTree = "<group>"; };
 		E6E7A3C823CFF36400ECB8C9 /* wasm3_lock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wasm3_lock.h; sourceTree = "<group>"; };
+		E6E7A3D523D0114B00ECB8C9 /* Image2DHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Image2DHelpers.cpp; path = source/Image2DHelpers.cpp; sourceTree = SOURCE_ROOT; };
+		E6E7A3D623D0114B00ECB8C9 /* m3_api_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m3_api_image.c; path = source/m3_api_image.c; sourceTree = SOURCE_ROOT; };
+		E6E7A3D723D0114B00ECB8C9 /* Image2DHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image2DHelpers.h; path = source/Image2DHelpers.h; sourceTree = SOURCE_ROOT; };
+		E6E7A3D823D0114B00ECB8C9 /* ImageIOSTB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageIOSTB.cpp; path = source/ImageIOSTB.cpp; sourceTree = SOURCE_ROOT; };
+		E6E7A3D923D0114B00ECB8C9 /* ThreadPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ThreadPool.cpp; path = source/ThreadPool.cpp; sourceTree = SOURCE_ROOT; };
+		E6E7A3DA23D0114B00ECB8C9 /* ThreadPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThreadPool.h; path = source/ThreadPool.h; sourceTree = SOURCE_ROOT; };
+		E6E7A3DB23D0114B00ECB8C9 /* m3_api_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m3_api_image.h; path = source/m3_api_image.h; sourceTree = SOURCE_ROOT; };
+		E6E7A3E023D0130400ECB8C9 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = source/Base64.h; sourceTree = SOURCE_ROOT; };
+		E6E7A3E123D0130400ECB8C9 /* Base64.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Base64.cpp; path = source/Base64.cpp; sourceTree = SOURCE_ROOT; };
+		E6E7A3E323D0464600ECB8C9 /* utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = utils.mm; path = source/utils.mm; sourceTree = SOURCE_ROOT; };
+		E6E7A3E523D0469100ECB8C9 /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = utils.h; path = source/utils.h; sourceTree = SOURCE_ROOT; };
 		F4F4C0C823C48DDA0098C4DA /* wams3test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wams3test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F4C0CB23C48DDA0098C4DA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F4F4C0CC23C48DDA0098C4DA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -209,6 +226,15 @@
 		F4F4C0FF23C490260098C4DA /* wasm3 */ = {
 			isa = PBXGroup;
 			children = (
+				E6E7A3E123D0130400ECB8C9 /* Base64.cpp */,
+				E6E7A3E023D0130400ECB8C9 /* Base64.h */,
+				E6E7A3D523D0114B00ECB8C9 /* Image2DHelpers.cpp */,
+				E6E7A3D723D0114B00ECB8C9 /* Image2DHelpers.h */,
+				E6E7A3D823D0114B00ECB8C9 /* ImageIOSTB.cpp */,
+				E6E7A3D623D0114B00ECB8C9 /* m3_api_image.c */,
+				E6E7A3DB23D0114B00ECB8C9 /* m3_api_image.h */,
+				E6E7A3D923D0114B00ECB8C9 /* ThreadPool.cpp */,
+				E6E7A3DA23D0114B00ECB8C9 /* ThreadPool.h */,
 				E6CC489123C88D35002BBDB9 /* m3_api_bgfx.c */,
 				E6CC489223C88D35002BBDB9 /* m3_api_bgfx.h */,
 				E6054A8D23C857D4006F3FE1 /* m3_api_bgfx_gen.c */,
@@ -216,6 +242,8 @@
 				CADEE60C23C97F13004663B9 /* m3_api_env.c */,
 				CADEE60E23CC0EDC004663B9 /* emscripten_fetch.h */,
 				CADEE60F23CC0EDC004663B9 /* emscripten_fetch.mm */,
+				E6E7A3E323D0464600ECB8C9 /* utils.mm */,
+				E6E7A3E523D0469100ECB8C9 /* utils.h */,
 			);
 			path = wasm3;
 			sourceTree = "<group>";
@@ -333,15 +361,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6E7A3E423D0464700ECB8C9 /* utils.mm in Sources */,
 				E6E7A3C923CFF36400ECB8C9 /* wasm3_lock.c in Sources */,
+				E6E7A3DD23D0114B00ECB8C9 /* m3_api_image.c in Sources */,
+				E6E7A3DF23D0114B00ECB8C9 /* ThreadPool.cpp in Sources */,
 				CADEE60D23C97F13004663B9 /* m3_api_env.c in Sources */,
 				E6054A8E23C857D5006F3FE1 /* m3_api_bgfx_gen.c in Sources */,
 				F4F4C0D023C48DDA0098C4DA /* ViewController.mm in Sources */,
 				F4F4C0DB23C48DDB0098C4DA /* main.m in Sources */,
 				E6CC489323C88D35002BBDB9 /* m3_api_bgfx.c in Sources */,
 				E6B4268823CED2D000DEEA19 /* M3BxAllocator.cpp in Sources */,
+				E6E7A3DC23D0114B00ECB8C9 /* Image2DHelpers.cpp in Sources */,
 				CADEE61023CC0EDC004663B9 /* emscripten_fetch.mm in Sources */,
 				F4F4C0CD23C48DDA0098C4DA /* AppDelegate.m in Sources */,
+				E6E7A3E223D0130400ECB8C9 /* Base64.cpp in Sources */,
+				E6E7A3DE23D0114B00ECB8C9 /* ImageIOSTB.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +534,7 @@
 					../bx/include,
 					../wasm3/source,
 					../bgfx/include,
+					../stb,
 				);
 				INFOPLIST_FILE = wams3test/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -528,6 +563,7 @@
 					../bx/include,
 					../wasm3/source,
 					../bgfx/include,
+					../stb,
 				);
 				INFOPLIST_FILE = wams3test/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

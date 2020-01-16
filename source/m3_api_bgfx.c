@@ -172,8 +172,28 @@ m3ApiRawFunction(m3_bgfx_copy)
 _catch:
     return result;
 }
+
+m3ApiRawFunction(m3_bgfx_alloc)
+{
+    M3Result result = m3Err_none;
+
+    m3ApiReturnType(ptr32)
+    m3ApiGetArg   (uint32_t       , _bgfx__size)
     
+    int totalSize = sizeof(bgfx_memory_s_wasm) + _bgfx__size;
+    const bgfx_memory_t* bgfxmem = bgfx_alloc(totalSize);
+    ((bgfx_memory_t*)bgfxmem)->size = _bgfx__size;
     
+    bgfx_memory_s_wasm *ret = (bgfx_memory_s_wasm*)(bgfxmem->data + _bgfx__size);
+    ret->size = _bgfx__size;
+    ret->data = m3ApiPtrToOffset(bgfxmem->data);
+    BGFX_CALL_TRACE("alloc");
+    m3ApiReturn(m3ApiPtrToOffset(ret))
+    
+_catch:
+    return result;
+}
+       
 m3ApiRawFunction(m3_bgfx_get_caps)
 {
     static u64 capsPtr = 0;
@@ -214,9 +234,9 @@ m3ApiRawFunction(m3_bgfx_get_caps)
 _        (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_get_caps", "*()", &m3_bgfx_get_caps)));
         
 _       (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_init", "i(*)", &m3_bgfx_init)));
-        
+        //m3_bgfx_alloc
 _        (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_copy", "*(*i)", &m3_bgfx_copy)));
-        
+_        (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_alloc", "*(i)", &m3_bgfx_alloc)));
         _        (SuppressLookupFailure (m3_LinkRawFunction (module, "env", "bgfx_dbg_text_printf", "v(iiiii)", &m3_bgfx_dbg_text_printf)));
         m3_LinkBGFX_Gen  (module, handle);
         InitAllocator(module->runtime);
