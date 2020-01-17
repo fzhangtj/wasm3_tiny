@@ -208,6 +208,11 @@ int checkLoading(uint32_t clipId) {
     if (!audioInitialized) return SoundClip::SoundClipStatus::FAIL;
     flushMemory();
     
+    auto idt = clipIdMap.find(clipId);
+    if (idt == clipIdMap.end()){
+        return SoundClip::SoundClipStatus::FAIL;
+    }
+    
     uint32_t clipSourceId = idt->second;
     
     auto it = clipMap.find(clipSourceId);
