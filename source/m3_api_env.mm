@@ -263,8 +263,8 @@ m3ApiRawFunction(js_html_audioStartLoadFile)
     char *audioClipName = (char *)m3ApiOffsetToPtr(fetchptr);
     NSString* url = [NSString stringWithUTF8String: audioClipName];
     
-    uint32_t clipIndex = startLoad(url);
-    m3ApiReturn(clipIndex)
+    uint32_t clipIndex = startLoad(url, audioClipIdx);
+    m3ApiReturn(audioClipIdx)
 }
 
 m3ApiRawFunction(js_html_audioCheckLoad)
@@ -317,6 +317,24 @@ m3ApiRawFunction(js_html_audioIsPlaying)
     uint32_t isPlay = isPlaying(audioSourceIdx) ? 1 : 0;
     
     m3ApiReturn(isPlay)
+}
+
+m3ApiRawFunction(js_html_audioSetVolume)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArg(int32_t, audioSourceIdx)
+    m3ApiGetArg(double, volume)
+    
+    m3ApiReturn(1)
+}
+
+m3ApiRawFunction(js_html_audioSetPan)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArg(int32_t, audioSourceIdx)
+    m3ApiGetArg(double, pan)
+    
+    m3ApiReturn(1)
 }
 
 M3Result    m3_LinkENV     (IM3Module module)
@@ -374,6 +392,8 @@ _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetFo
     (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioPlay",                 "i(iiFi)", &js_html_audioPlay)));
     (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioStop",                 "i(ii)", &js_html_audioStop)));
     (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioIsPlaying",                 "i(i)", &js_html_audioIsPlaying)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioSetVolume",                 "i(iF)", &js_html_audioSetVolume)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioSetPan",                 "i(iF)", &js_html_audioSetPan)));
 
 _catch:
     return result;

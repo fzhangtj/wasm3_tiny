@@ -12,7 +12,7 @@
 #include "SoundClip.h"
 #include "SoundSource.h"
 
-uint32_t startLoad(NSString* path);
+uint32_t startLoad(NSString* path, uint32_t clipID);
 
 int checkLoading(uint32_t clipId);
 
