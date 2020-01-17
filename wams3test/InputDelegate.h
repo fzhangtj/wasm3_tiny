@@ -23,5 +23,7 @@ void InputInitWindowSize(int with, int height);
 int32_t* getTouches();
 int32_t getTouchCount();
 void clearTouches();
+int32_t getWindowHeight();
+int32_t getWindowWidth();
 
 #endif /* InputDelegate_h */

@@ -155,8 +155,8 @@ m3ApiRawFunction(js_html_getScreenSize)
     m3ApiGetArgMem  (u32*,    wPtr)
     m3ApiGetArgMem  (u32*,    hPtr)
     
-    *wPtr = 375;
-    *hPtr = 667;
+    *wPtr = getWindowWidth();
+    *hPtr = getWindowHeight();
     
     return m3Err_none;
 }
