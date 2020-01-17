@@ -51,6 +51,7 @@ unsigned gTouchesActiveBound = 0;
 int32_t touch_info_stream[1024];
 int32_t touch_count = 0;
 int windowH;
+int windowW;
 
 Touch* FindTouch(UITouch const* native, uint eventFrame)
 {
@@ -128,9 +129,12 @@ bool UpdateTouchData(UIView* view, UITouch const* native, uint eventFrame)
         touch->phase = newPhase;
 
     touch->type = [native type];
-
-    touch->xPos = [native locationInView: view].x * [[UIScreen mainScreen] scale];
-    touch->yPos = [native locationInView: view].y * [[UIScreen mainScreen] scale];
+    
+    float posX = [native locationInView: view].x * view.contentScaleFactor;
+    float posY = [native locationInView: view].y * view.contentScaleFactor;
+    
+    touch->xPos = posX;
+    touch->yPos = posY;
     touch->deltaTime += std::max((float)([native timestamp] - touch->timestamp), 0.0f);
     touch->timestamp = [native timestamp];
     touch->eventFrame = eventFrame;
@@ -258,6 +262,15 @@ void InputInit(UIView* view)
 
 void InputInitWindowSize(int width, int height) {
     windowH = height;
+    windowW = width;
+}
+
+int32_t getWindowHeight() {
+    return windowH;
+}
+
+int32_t getWindowWidth() {
+    return windowW;
 }
 
 void touchevent(int uid, int action, int xpos, int ypos)

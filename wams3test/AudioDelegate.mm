@@ -42,6 +42,7 @@ uint32_t sourceIDPool = 0;
 std::map<uint32_t, SoundSource*> sourceMap;
 
 std::map<uint32_t, uint32_t> sourceIdMap;
+std::map<uint32_t, uint32_t> clipIdMap;
 
 ma_device_config maConfig;
 ma_device* maDevice;
@@ -191,11 +192,14 @@ void initAudio() {
     audioInitialized = true;
 }
 
-uint32_t startLoad(NSString* path) {
+uint32_t startLoad(NSString* path, uint32_t clipID) {
     if (!audioInitialized) return 0;
+    
+    //NSLog(@"load audio: %@ as %d", path, clipID);
     
     ++clipIDPool;
     clipMap[clipIDPool] = new SoundClip(path);
+    clipIdMap[clipID] = clipIDPool;
     
     return clipIDPool;
 }
@@ -204,7 +208,14 @@ int checkLoading(uint32_t clipId) {
     if (!audioInitialized) return SoundClip::SoundClipStatus::FAIL;
     flushMemory();
     
-    auto it = clipMap.find(clipId);
+    auto idt = clipIdMap.find(clipId);
+    if (idt == clipIdMap.end()){
+        return SoundClip::SoundClipStatus::FAIL;
+    }
+    
+    uint32_t clipSourceId = idt->second;
+    
+    auto it = clipMap.find(clipSourceId);
     if (it == clipMap.end())
     {
         return SoundClip::SoundClipStatus::FAIL;
@@ -233,15 +244,26 @@ uint32_t playSource(uint32_t clipID, uint32_t sourceID, float volume, bool loop)
 {
     if (!audioInitialized) return 0;
     flushMemory();
+    
+    auto idt = clipIdMap.find(clipID);
+    if (idt == clipIdMap.end())
+    {
+        return SoundClip::SoundClipStatus::FAIL;
+    }
+    
+    uint32_t clipSourceId = idt->second;
 
-    auto it = clipMap.find(clipID);
+    auto it = clipMap.find(clipSourceId);
     if (it == clipMap.end()) {
-        //printf("playSource() clipID=%d failed.", clipID);
+        printf("playSource() clipID=%d failed.", clipID);
         return false;
     }
 
     SoundClip* clip = it->second;
     //ASSERT(clip);
+    if (clip == NULL) {
+        printf("invalid clip!");
+    }
 
     SoundSource* source = new SoundSource(clip);
 
@@ -253,7 +275,8 @@ uint32_t playSource(uint32_t clipID, uint32_t sourceID, float volume, bool loop)
     {
         std::lock_guard<std::mutex> lock(sourceListMutex);
         sourceMap[++sourceIDPool] = source;
-        //printf("SoundSource %d created", sourceIDPool);
+        
+        //printf("SoundSource %d for clip %d created\n", sourceID, clipID);
         
         updateSourceIdMap(sourceID, sourceIDPool);
         
