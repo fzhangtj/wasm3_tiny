@@ -12,6 +12,27 @@
 #include "m3_code.h"
 #include "miniaudio.h"
 
+NSData* sendSynchronousRequest(NSURLRequest* request) {
+    
+    dispatch_semaphore_t    sem;
+    __block NSData *        result;
+    result = nil;
+
+    sem = dispatch_semaphore_create(0);
+
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request
+        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error == nil) {
+            result = data;
+        }
+        dispatch_semaphore_signal(sem);
+    }] resume];
+
+    dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+
+   return result;
+}
+
 
 SoundClip::SoundClipStatus SoundClip::checkLoad()
 {
@@ -23,38 +44,12 @@ SoundClip::SoundClipStatus SoundClip::checkLoad()
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: nsurl];
         [request setHTTPMethod: @"GET"];
         
-        id completionHandler = ^(NSData *receivedData, NSURLResponse *response, NSError *error) {dispatch_async(dispatch_get_main_queue(), ^{
-            M3Result result = m3Err_none;
-            if (error)
-            {
-                this->m_status = IN_FAIL;
-                printf("error in audio loading: %s", this->m_url);
-            }
-            else {
-                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-                u64 len = [receivedData length];
-                const void* data = [receivedData bytes];
-                this->m_memory = (void*)data;
-                this->m_memorySize = len;
-                NSLog(@"response = %@, %d\n", this->m_url, this->m_memorySize);
-                
-                this->m_status = IN_WORKING;
-            }
-            
-        _catch:
-            if (result) {
-                this->m_status = IN_FAIL;
-                printf("error in dataTask completionHandler: %s.", result);
-            }
-        });};
+        NSData* receivedData = sendSynchronousRequest(request);
+        u64 len = [receivedData length];
+        const void* data = [receivedData bytes];
+        this->m_memory = (void*)data;
+        this->m_memorySize = len;
         
-        NSURLSessionDataTask *task = [[NSURLSession sharedSession]
-                    dataTaskWithRequest:request completionHandler:completionHandler];
-        [task resume];
-        
-        this->m_status = IN_FETCHING;
-    }
-    else if (this->m_status == IN_WORKING) {
         ma_decoder_config config;
         memset(&config, 0, sizeof(config));
         config.format = ma_format_s16;
