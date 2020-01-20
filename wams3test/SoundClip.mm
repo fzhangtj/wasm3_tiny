@@ -11,7 +11,7 @@
 #include "m3.h"
 #include "m3_code.h"
 #include "miniaudio.h"
-
+#include "utils.h"
 NSData* sendSynchronousRequest(NSURLRequest* request) {
     
     dispatch_semaphore_t    sem;
@@ -38,7 +38,7 @@ SoundClip::SoundClipStatus SoundClip::checkLoad()
 {
     if (this->m_status == IN_INIT) {
         //start fetch from url
-        NSURL* nsbaseurl = [NSURL URLWithString: @"http://10.86.96.228:8080/"];
+        NSURL* nsbaseurl = [NSURL URLWithString: [NSString stringWithUTF8String:BASE_URL]];
         NSURL* nsurl = [NSURL URLWithString: this->m_url relativeToURL: nsbaseurl];
         
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: nsurl];

@@ -389,7 +389,7 @@ _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetFo
     (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioStartLoadFile",                 "i(*i)", &js_html_audioStartLoadFile)));
     (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioCheckLoad",                 "i(i)", &js_html_audioCheckLoad)));
     (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioFree",                 "v(i)", &js_html_audioFree)));
-    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioPlay",                 "i(iiFi)", &js_html_audioPlay)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioPlay",                 "i(iiFFi)", &js_html_audioPlay)));
     (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioStop",                 "i(ii)", &js_html_audioStop)));
     (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioIsPlaying",                 "i(i)", &js_html_audioIsPlaying)));
     (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioSetVolume",                 "i(iF)", &js_html_audioSetVolume)));
