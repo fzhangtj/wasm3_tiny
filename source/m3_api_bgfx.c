@@ -21,13 +21,27 @@ extern "C" {
 #include "m3_api_defs.h"
 #include "m3_env.h"
 #include "m3_exception.h"
-    
+#include "wasm3_lock.h"
     
     
 #include <stdlib.h>
 #include <string.h>
 #define FATAL(msg, ...) { printf("Error: [Fatal] " msg "\n", ##__VA_ARGS__); }
+    
+    
+#define m3ApiRawFunction(NAME) \
+    const void * __##NAME (IM3Runtime runtime, uint64_t * _sp, void * _mem);  \
+    const void * NAME (IM3Runtime runtime, uint64_t * _sp, void * _mem) \
+    { \
+        wasm3_unlock(); \
+        const void *res = __##NAME(runtime, _sp, _mem); \
+        wasm3_lock(); \
+        return res; \
+    }\
+    \
+    inline const void * __##NAME (IM3Runtime runtime, uint64_t * _sp, void * _mem)
 
+    
 static void* whandle;
 static IM3Function mallocFunc;
 static IM3Function reallocFunc;
@@ -205,6 +219,7 @@ m3ApiRawFunction(m3_bgfx_get_caps)
         else
             return i_result;
     }
+    
     
     extern M3Result  m3_LinkBGFX_Gen  (IM3Module module, void* handle);
     M3Result  m3_LinkBGFX  (IM3Module module, void* handle)

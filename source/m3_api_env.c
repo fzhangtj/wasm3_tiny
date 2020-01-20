@@ -78,6 +78,14 @@ typedef struct AnimationFrameCallback
 
 AnimationFrameCallback __raf;
 
+
+// int compareFuncs(const void * ptr1, const void *ptr2) {
+//     IM3Function func1 = *(IM3Function *) ptr1;
+//     IM3Function func2 = *(IM3Function *) ptr2;
+    
+//     return (int)(func2->hits1 - func1->hits1);
+// }
+
 void runAnimationFrame(f64 timeStamp)
 {
     wasm3_lock();
@@ -94,6 +102,36 @@ _       (m3_CallDirect(raf.function, args, &r))
         if (r) {
             __raf = raf;
         }
+ 
+        // static int count = 0;
+        // if (count++ % (1) == 0) {
+        //     IM3Module module = raf.function->module;
+            
+        //     IM3Function funcs[module->numFunctions];
+        //     for (u32 i = 0; i < module->numFunctions; ++i)
+        //     {
+        //         funcs[i] = & module->functions [i];
+        //     }
+            
+        //     qsort(funcs, module->numFunctions, sizeof(IM3Function), compareFuncs);
+            
+        //     for (u32 i = 0; i < module->numFunctions; ++i)
+        //     {
+        //         IM3Function f = funcs[i];
+        //         if (!f) {
+        //             continue;
+        //         }
+                
+        //         if (i < 10 && f && f->name) {
+        //             //printf("hits; %s; %d; %lf\n", f->name, f->hits, f->hits1);
+        //         }
+                
+        //         f->hits = 0;
+        //         f->hits1 = 0.0;
+        //     }
+
+        //     printf("=========\n");
+        // }
         
 _catch:
         if (result)
@@ -201,6 +239,54 @@ m3ApiRawFunction(js_inputGetCanvasLost)
     m3ApiReturn(0)
 }
 
+m3ApiRawFunction(m3_memcpy)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArgMem(void*, dst)
+    m3ApiGetArgMem(void*, src)
+    m3ApiGetArg  (i32,    len)
+
+    void *res = memcpy(dst, src, len);
+    
+    m3ApiReturn(m3ApiPtrToOffset(res))
+}
+
+m3ApiRawFunction(m3_memset)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArgMem(void*, ptr)
+    m3ApiGetArg(i32, val)
+    m3ApiGetArg(i32, len)
+
+    void *res = memset(ptr, val, len);
+    
+    m3ApiReturn(m3ApiPtrToOffset(res))
+}
+
+m3ApiRawFunction(m3_memmove)
+{
+     m3ApiReturnType (i32)
+       m3ApiGetArgMem(void*, dst)
+       m3ApiGetArgMem(void*, src)
+       m3ApiGetArg  (i32,    len)
+
+       void *res = memmove(dst, src, len);
+       
+       m3ApiReturn(m3ApiPtrToOffset(res))
+}
+
+m3ApiRawFunction(m3_memcmp)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArgMem(void*, ptr1)
+     m3ApiGetArgMem(void*, ptr2)
+    m3ApiGetArg(i32, len)
+
+    int res = memcmp(ptr1, ptr2, len);
+    
+    m3ApiReturn(res)
+}
+
 M3Result    m3_LinkENV     (IM3Module module)
 {
     M3Result result = m3Err_none;
@@ -245,6 +331,11 @@ _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetMo
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetTouchStream",               "i(ii)", &js_inputGetKeyStream)));
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetCanvasLost",                "i()", &js_inputGetCanvasLost)));
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetFocusLost",                 "i()", &js_inputGetCanvasLost)));
+
+_   (m3_LinkRawFunction (module, "*", "memcpy",                         "i(iii)", &m3_memcpy));
+_   (m3_LinkRawFunction (module, "*", "memset",                         "i(iii)", &m3_memset));
+_   (m3_LinkRawFunction (module, "*", "memmove",                         "i(iii)", &m3_memmove));
+_   (m3_LinkRawFunction (module, "*", "memcmp",                         "i(iii)", &m3_memcmp));
 
 _catch:
     return result;

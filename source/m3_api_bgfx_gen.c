@@ -5,9 +5,21 @@
 #include "m3_api_defs.h"
 #include "m3_env.h"
 #include "m3_exception.h"
+#include "wasm3_lock.h"
 
 static void* whandle;
 
+#define m3ApiRawFunction(NAME) \
+const void * __##NAME (IM3Runtime runtime, uint64_t * _sp, void * _mem);  \
+const void * NAME (IM3Runtime runtime, uint64_t * _sp, void * _mem) \
+{ \
+    wasm3_unlock(); \
+    const void *res = __##NAME(runtime, _sp, _mem); \
+    wasm3_lock(); \
+    return res; \
+}\
+\
+inline const void * __##NAME (IM3Runtime runtime, uint64_t * _sp, void * _mem)
 
 
 m3ApiRawFunction(m3_bgfx_vertex_layout_begin)

@@ -11,6 +11,7 @@
 #import <Foundation/Foundation.h>
 #include "m3_env.h"
 #include "m3_exception.h"
+#include "wasm3_lock.h"
 
 m3ApiRawFunction(_emscripten_fetch_free)
 {
@@ -116,10 +117,14 @@ _           (m3_CallDirect(onerrorFunc, args, NULL))
             
             if (httpResponse.statusCode >= 200 && httpResponse.statusCode < 300) {
                 u64 args[] = {fetchptr};
+                wasm3_lock();
 _               (m3_CallDirect(onsuccessFunc, args, NULL))
+                wasm3_unlock();
             } else {
                 u64 args[] = {fetchptr};
+                wasm3_lock();
 _               (m3_CallDirect(onerrorFunc, args, NULL))
+                wasm3_unlock();
             }
         }
         

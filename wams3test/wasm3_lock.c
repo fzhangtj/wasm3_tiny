@@ -44,29 +44,29 @@ int wasm3_lock_init() {
     return 0;
 }
 
-int wasm3_lock() {
-//    if (!initialized) {
-//        printf("Wasm3Lock not initialized!\n");
-//        return -1;
-//    }
-//    int lockresult = pthread_mutex_lock( &wasmMutex );
-//    if (lockresult) {
-//        printf("pthread_mutex_lock fail with code %d\n", lockresult);
-//        return -1;
-//    }
+inline int wasm3_lock() {
+    if (!initialized) {
+        printf("Wasm3Lock not initialized!\n");
+        return -1;
+    }
+    int lockresult = pthread_mutex_lock( &wasmMutex );
+    if (lockresult) {
+        printf("pthread_mutex_lock fail with code %d\n", lockresult);
+        return -1;
+    }
     return 0;
 }
 
-int wasm3_unlock() {
-//    if (!initialized) {
-//        printf("Wasm3Lock not initialized!\n");
-//        return -1;
-//    }
-//    int unlockresult = pthread_mutex_unlock(&wasmMutex );
-//    if (unlockresult) {
-//        printf("pthread_mutex_unlock fail with code %d\n", unlockresult);
-//        return -1;
-//    }
+inline int wasm3_unlock() {
+    if (!initialized) {
+        printf("Wasm3Lock not initialized!\n");
+        return -1;
+    }
+    int unlockresult = pthread_mutex_unlock(&wasmMutex );
+    if (unlockresult) {
+        printf("pthread_mutex_unlock fail with code %d\n", unlockresult);
+        return -1;
+    }
     return 0;
 }
 
