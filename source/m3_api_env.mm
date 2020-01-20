@@ -15,6 +15,8 @@
 #include "m3_exec.h"
 #include "emscripten_fetch.h"
 #include "wasm3_lock.h"
+#include "InputDelegate.h"
+#include "AudioDelegate.h"
 
 #include <time.h>
 #include <unistd.h>
@@ -96,7 +98,7 @@ void runAnimationFrame(f64 timeStamp)
         M3Result result = m3Err_none;
         
         u64 r;
-        u64 args[2] = {timeStamp, raf.userData};
+        u64 args[2] = {(u64)timeStamp, (u64)raf.userData};
       
 _       (m3_CallDirect(raf.function, args, &r))
         if (r) {
@@ -191,8 +193,8 @@ m3ApiRawFunction(js_html_getScreenSize)
     m3ApiGetArgMem  (u32*,    wPtr)
     m3ApiGetArgMem  (u32*,    hPtr)
     
-    *wPtr = 375;
-    *hPtr = 667;
+    *wPtr = getWindowWidth();
+    *hPtr = getWindowHeight();
     
     return m3Err_none;
 }
@@ -216,6 +218,7 @@ m3ApiRawFunction(js_inputInit)
 
 m3ApiRawFunction(js_inputResetStreams)
 {
+    clearTouches();
     return m3Err_none;
 }
 
@@ -231,6 +234,26 @@ m3ApiRawFunction(js_inputGetKeyStream)
     m3ApiGetArg  (i32,    arg1)
     m3ApiGetArg  (i32,    arg2)
     m3ApiReturn(0)
+}
+
+m3ApiRawFunction(js_inputGetTouchStream)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArg     (i32,  maxLen)
+    m3ApiGetArgMem  (i32*, Ptr)
+
+    int32_t touchCount = getTouchCount();
+    int32_t* touches = getTouches();
+
+    if (touchCount != 0) {
+        if (touchCount > maxLen) {
+            touchCount = maxLen;
+        }
+        //NSLog(@"touchCount = %d", touchCount);
+        memcpy (Ptr, touches, touchCount * sizeof(int32_t));
+    }
+
+    m3ApiReturn(touchCount)
 }
 
 m3ApiRawFunction(js_inputGetCanvasLost)
@@ -287,6 +310,119 @@ m3ApiRawFunction(m3_memcmp)
     m3ApiReturn(res)
 }
 
+m3ApiRawFunction(js_html_initAudio)
+{
+    m3ApiReturnType (i32)
+    initAudio();
+    m3ApiReturn(1)
+}
+
+m3ApiRawFunction(js_html_audioIsUnlocked)
+{
+    m3ApiReturnType (i32)
+    m3ApiReturn(1)
+}
+
+m3ApiRawFunction(js_html_audioUnlock)
+{
+    return m3Err_none;
+}
+
+m3ApiRawFunction(js_html_audioPause)
+{
+    pauseAudio(true);
+    return m3Err_none;
+}
+
+m3ApiRawFunction(js_html_audioResume)
+{
+    pauseAudio(false);
+    return m3Err_none;
+}
+
+m3ApiRawFunction(js_html_audioStartLoadFile)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArg(u32, fetchptr)
+    m3ApiGetArg(int32_t, audioClipIdx)
+
+    char *audioClipName = (char *)m3ApiOffsetToPtr(fetchptr);
+    NSString* url = [NSString stringWithUTF8String: audioClipName];
+    
+    uint32_t clipIndex = startLoad(url, audioClipIdx);
+    m3ApiReturn(audioClipIdx)
+}
+
+m3ApiRawFunction(js_html_audioCheckLoad)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArg(int32_t, audioClipIdx)
+    
+    int status = checkLoading(audioClipIdx);
+    m3ApiReturn(status);
+}
+
+m3ApiRawFunction(js_html_audioFree)
+{
+    m3ApiGetArg(int32_t, audioClipIdx)
+    return m3Err_none;
+}
+
+m3ApiRawFunction(js_html_audioPlay)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArg(int32_t, audioClipIdx)
+    m3ApiGetArg(int32_t, audioSourceIdx)
+    m3ApiGetArg(double_t, volume)
+    m3ApiGetArg(int32_t, loop)
+    
+    playSource(audioClipIdx, audioSourceIdx, volume, loop);
+    
+    m3ApiReturn(1)
+}
+
+m3ApiRawFunction(js_html_audioStop)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArg(int32_t, audioSourceIdx)
+    m3ApiGetArg(int32_t, doStop)
+    
+    uint32_t isOk = 0;
+    if (doStop != 0) {
+        isOk = stopSource(audioSourceIdx) ? 1 : 0;
+    }
+    
+    m3ApiReturn(isOk)
+}
+
+m3ApiRawFunction(js_html_audioIsPlaying)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArg(int32_t, audioSourceIdx)
+    
+    uint32_t isPlay = isPlaying(audioSourceIdx) ? 1 : 0;
+    
+    m3ApiReturn(isPlay)
+}
+
+m3ApiRawFunction(js_html_audioSetVolume)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArg(int32_t, audioSourceIdx)
+    m3ApiGetArg(double, volume)
+    
+    m3ApiReturn(1)
+}
+
+m3ApiRawFunction(js_html_audioSetPan)
+{
+    m3ApiReturnType (i32)
+    m3ApiGetArg(int32_t, audioSourceIdx)
+    m3ApiGetArg(double, pan)
+    
+    m3ApiReturn(1)
+}
+
 M3Result    m3_LinkENV     (IM3Module module)
 {
     M3Result result = m3Err_none;
@@ -328,9 +464,22 @@ _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputReset
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputSetMouseMode",                 "v(i)", &js_inputSetMouseMode)));
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetKeyStream",                 "i(ii)", &js_inputGetKeyStream)));
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetMouseStream",               "i(ii)", &js_inputGetKeyStream)));
-_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetTouchStream",               "i(ii)", &js_inputGetKeyStream)));
+_   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetTouchStream",               "i(ii)", &js_inputGetTouchStream)));
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetCanvasLost",                "i()", &js_inputGetCanvasLost)));
 _   (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_inputGetFocusLost",                 "i()", &js_inputGetCanvasLost)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_initAudio",                 "i()", &js_html_initAudio)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioIsUnlocked",                 "i()", &js_html_audioIsUnlocked)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioUnlock",                 "v()", &js_html_audioUnlock)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioPause",                 "v()", &js_html_audioPause)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioResume",                 "v()", &js_html_audioResume)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioStartLoadFile",                 "i(*i)", &js_html_audioStartLoadFile)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioCheckLoad",                 "i(i)", &js_html_audioCheckLoad)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioFree",                 "v(i)", &js_html_audioFree)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioPlay",                 "i(iiFFi)", &js_html_audioPlay)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioStop",                 "i(ii)", &js_html_audioStop)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioIsPlaying",                 "i(i)", &js_html_audioIsPlaying)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioSetVolume",                 "i(iF)", &js_html_audioSetVolume)));
+    (SuppressLookupFailure (m3_LinkRawFunction (module, mod_name, "js_html_audioSetPan",                 "i(iF)", &js_html_audioSetPan)));
 
 _   (m3_LinkRawFunction (module, "*", "memcpy",                         "i(iii)", &m3_memcpy));
 _   (m3_LinkRawFunction (module, "*", "memset",                         "i(iii)", &m3_memset));

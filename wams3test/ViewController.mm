@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "InputDelegate.h"
 
 #include <Metal/Metal.h>
 #include "wasm3_lock.h"
@@ -18,13 +19,13 @@ static    id<MTLDevice>  m_device = NULL;
 static    void* m_device = NULL;
 #endif
 
-
+#include "utils.h"
 #include "m3.h"
 #include "m3_api_wasi.h"
 #include "m3_api_libc.h"
 #include "m3_api_bgfx.h"
 #include "m3_api_env.h"
-
+#include "m3_api_image.h"
 #include "m3_env.h"
 
 #include "extra/fib32.wasm.h"
@@ -72,7 +73,9 @@ extern "C"
         M3Result result = m3Err_none;
         
 
-        NSURL *fileUrl = [NSURL URLWithString:@"http://10.86.98.112:8080/MoleTiny3D.wasm"];
+        NSURL* nsbaseurl = [NSURL URLWithString:  [NSString stringWithUTF8String:BASE_URL]];
+        NSURL *fileUrl = [NSURL URLWithString: [NSString stringWithUTF8String: "MoleTiny3D.wasm"] relativeToURL: nsbaseurl];
+        
         static NSData *fileData = [NSData dataWithContentsOfURL:fileUrl];
         
         u8* wasm = (u8*)fileData.bytes;
@@ -98,9 +101,13 @@ extern "C"
         result = m3_LinkBGFX (runtime->modules, whandle);
         if (result) FATAL("m3_LinkBGFX: %s", result);
         
+        result = m3_LinkImage(runtime->modules);
+        if (result) FATAL("m3_LinkImage: %s", result);
+        
         result = m3_InitMallocFunc(runtime);
         if (result) FATAL("m3_InitMallocFunc: %s", result);
 
+        
         //m3_InitMallocFunc
         result = repl_call(runtime, "_start");
         
@@ -148,6 +155,7 @@ extern "C"
     uint32_t frameW = (uint32_t)(self.contentScaleFactor * self.frame.size.width);
     uint32_t frameH = (uint32_t)(self.contentScaleFactor * self.frame.size.height);
     //s_ctx->m_eventQueue.postSizeEvent(s_defaultWindow, frameW, frameH);
+    InputInitWindowSize(frameW, frameH);
 }
 
 - (void)start
@@ -159,6 +167,7 @@ extern "C"
         //        [m_displayLink addToRunLoop:[NSRunLoop currentRunLoop]];
         [m_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
         //[m_displayLink setPreferredFramesPerSecond:60];
+        InputInit(self);
     }
 }
 
@@ -168,12 +177,14 @@ extern "C"
     {
         [m_displayLink invalidate];
         m_displayLink = nil;
+        InputShutdown();
     }
 }
 
 - (void)renderFrame
 {
     runAnimationFrame(0.0);
+    InputProcess();
     
    // bgfx::renderFrame();
 }
@@ -212,5 +223,24 @@ extern "C"
     [(View *)self.view  start];
 }
 
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event
+{
+    ProcessTouchEvents(self.view, touches, [event allTouches]);
+}
+
+- (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event
+{
+    ProcessTouchEvents(self.view, touches, [event allTouches]);
+}
+
+- (void)touchesCancelled:(NSSet*)touches withEvent:(UIEvent*)event
+{
+    ProcessTouchEvents(self.view, touches, [event allTouches]);
+}
+
+- (void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event
+{
+    ProcessTouchEvents(self.view, touches, [event allTouches]);
+}
 
 @end

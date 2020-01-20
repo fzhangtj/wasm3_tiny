@@ -12,6 +12,7 @@
 #include "m3_env.h"
 #include "m3_exception.h"
 #include "wasm3_lock.h"
+#include "utils.h"
 
 m3ApiRawFunction(_emscripten_fetch_free)
 {
@@ -68,11 +69,12 @@ _       (m3_FindIndirectFunction(&onsuccessFunc, module, onsuccess))
     url = (char *)m3ApiOffsetToPtr(urlptr);
     requestMethod = fetch->__attributes.requestMethod;
     
-    nsbaseurl = [NSURL URLWithString: @"http://10.86.98.112:8080/"];
+    nsbaseurl = [NSURL URLWithString:  [NSString stringWithUTF8String:BASE_URL]];
     nsurl = [NSURL URLWithString: [NSString stringWithUTF8String: url] relativeToURL: nsbaseurl];
     nsrequestMethod = [NSString stringWithUTF8String: requestMethod];
     
-    request = [NSMutableURLRequest requestWithURL: nsurl];
+    request = [NSMutableURLRequest requestWithURL: nsurl cachePolicy:NSURLRequestReloadIgnoringCacheData
+    timeoutInterval:60.0];
     [request setHTTPMethod: nsrequestMethod];
     
     static IM3Function mallocFunc = NULL;
